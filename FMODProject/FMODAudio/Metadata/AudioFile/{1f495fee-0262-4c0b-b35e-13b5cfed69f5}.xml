@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{1f495fee-0262-4c0b-b35e-13b5cfed69f5}">
+		<property name="assetPath">
+			<value>Track 1 Stems/CIS4930 VR Project 2 strings.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>52.602743764172338</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{c2c0debf-0c45-4f6d-82e8-12d57942ec31}</destination>
+		</relationship>
+	</object>
+</objects>
