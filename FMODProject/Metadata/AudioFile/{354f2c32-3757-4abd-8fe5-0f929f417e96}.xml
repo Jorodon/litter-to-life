@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.03.00">
-	<object class="AudioFile" id="{a4493cf1-4056-4d9f-94d1-60f33106ef50}">
+	<object class="AudioFile" id="{354f2c32-3757-4abd-8fe5-0f929f417e96}">
 		<property name="assetPath">
-			<value>Track 1 Stems/CIS4930 VR Project 2 bass outro.wav</value>
+			<value>Track 1 Stems/CIS4930 VR Project 2 bass outro 1st.wav</value>
 		</property>
 		<property name="isStreaming">
 			<value>true</value>
