@@ -26,10 +26,38 @@
 		<property name="nameOfPropertyBeingAutomated">
 			<value>cursorPosition</value>
 		</property>
+		<relationship name="automationCurves">
+			<destination>{cbe59f02-2739-44c8-a284-d25a2a531b71}</destination>
+		</relationship>
 	</object>
 	<object class="SeekModulator" id="{05f4a463-6bb2-4031-9560-37e518bc0b19}">
 		<property name="nameOfPropertyBeingModulated">
 			<value>cursorPosition</value>
+		</property>
+	</object>
+	<object class="AutomationCurve" id="{cbe59f02-2739-44c8-a284-d25a2a531b71}">
+		<relationship name="parameter">
+			<destination>{d541c896-7476-444e-9413-d6f673aa57ff}</destination>
+		</relationship>
+		<relationship name="automationPoints">
+			<destination>{e0e204db-d50c-43fc-b611-38b8a5793224}</destination>
+			<destination>{06bb5a4a-217a-4d08-8fc5-d304cd1311d4}</destination>
+		</relationship>
+	</object>
+	<object class="AutomationPoint" id="{e0e204db-d50c-43fc-b611-38b8a5793224}">
+		<property name="position">
+			<value>5</value>
+		</property>
+		<property name="value">
+			<value>1</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{06bb5a4a-217a-4d08-8fc5-d304cd1311d4}">
+		<property name="position">
+			<value>4</value>
+		</property>
+		<property name="value">
+			<value>0</value>
 		</property>
 	</object>
 </objects>
