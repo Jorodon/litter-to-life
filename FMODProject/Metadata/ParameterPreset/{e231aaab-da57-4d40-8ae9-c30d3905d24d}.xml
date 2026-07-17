@@ -1,38 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.03.00">
-	<object class="ParameterPreset" id="{b83244c9-82c6-4ece-8f49-53bbddff22e7}">
+	<object class="ParameterPreset" id="{e231aaab-da57-4d40-8ae9-c30d3905d24d}">
 		<property name="name">
-			<value>Ambient Air Volume</value>
+			<value>Lead Volume</value>
 		</property>
 		<relationship name="folder">
 			<destination>{399b7b6b-cc31-4dc2-bad4-3c568911553a}</destination>
 		</relationship>
 		<relationship name="parameter">
-			<destination>{30a5013f-6dc9-4724-a527-80fc372558a7}</destination>
+			<destination>{2fccb1ad-cd75-4c1c-91b1-7596599999f2}</destination>
 		</relationship>
 	</object>
-	<object class="GameParameter" id="{30a5013f-6dc9-4724-a527-80fc372558a7}">
+	<object class="GameParameter" id="{2fccb1ad-cd75-4c1c-91b1-7596599999f2}">
 		<property name="initialValue">
 			<value>0</value>
 		</property>
 		<relationship name="automators">
-			<destination>{24a7a0a4-0a05-4063-b5e2-e649774d27b7}</destination>
+			<destination>{688205c4-9ad2-449b-a119-51ccaea7d042}</destination>
 		</relationship>
 		<relationship name="modulators">
-			<destination>{9036f5a9-0332-4d3c-8162-baefc413d17e}</destination>
+			<destination>{05f4a463-6bb2-4031-9560-37e518bc0b19}</destination>
 		</relationship>
 	</object>
-	<object class="Automator" id="{24a7a0a4-0a05-4063-b5e2-e649774d27b7}">
+	<object class="Automator" id="{688205c4-9ad2-449b-a119-51ccaea7d042}">
 		<property name="nameOfPropertyBeingAutomated">
 			<value>cursorPosition</value>
 		</property>
 	</object>
-	<object class="SeekModulator" id="{9036f5a9-0332-4d3c-8162-baefc413d17e}">
+	<object class="SeekModulator" id="{05f4a463-6bb2-4031-9560-37e518bc0b19}">
 		<property name="nameOfPropertyBeingModulated">
 			<value>cursorPosition</value>
-		</property>
-		<property name="speedAscending">
-			<value>0.19999998807907104</value>
 		</property>
 	</object>
 </objects>
