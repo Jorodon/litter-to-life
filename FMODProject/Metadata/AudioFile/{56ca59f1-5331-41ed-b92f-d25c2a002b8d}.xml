@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{56ca59f1-5331-41ed-b92f-d25c2a002b8d}">
+		<property name="assetPath">
+			<value>SFX/Footsteps/Dirt/freesound_community-footsteps-on-the-dirt-road-27671.mp3</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>24</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>32.112000000000002</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{c2c0debf-0c45-4f6d-82e8-12d57942ec31}</destination>
+		</relationship>
+	</object>
+</objects>
