@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="ParameterPreset" id="{5951d5a9-76e7-4455-b655-90751d64281d}">
+		<property name="name">
+			<value>Pad Volume</value>
+		</property>
+		<relationship name="folder">
+			<destination>{399b7b6b-cc31-4dc2-bad4-3c568911553a}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{2ff1d998-bf45-4670-89b3-1a3178a66976}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{2ff1d998-bf45-4670-89b3-1a3178a66976}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+		<relationship name="automators">
+			<destination>{31df3c8c-bdd4-4cc5-88c3-3a1c5bc6844c}</destination>
+		</relationship>
+		<relationship name="modulators">
+			<destination>{8302e3d8-4132-4ec2-867d-0b57b53baf47}</destination>
+		</relationship>
+	</object>
+	<object class="Automator" id="{31df3c8c-bdd4-4cc5-88c3-3a1c5bc6844c}">
+		<property name="nameOfPropertyBeingAutomated">
+			<value>cursorPosition</value>
+		</property>
+		<relationship name="automationCurves">
+			<destination>{b1e0a6c6-b240-40af-9a9a-07175df32ba9}</destination>
+		</relationship>
+	</object>
+	<object class="SeekModulator" id="{8302e3d8-4132-4ec2-867d-0b57b53baf47}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>cursorPosition</value>
+		</property>
+		<property name="speedAscending">
+			<value>0.19999998807907104</value>
+		</property>
+	</object>
+	<object class="AutomationCurve" id="{b1e0a6c6-b240-40af-9a9a-07175df32ba9}">
+		<relationship name="parameter">
+			<destination>{d541c896-7476-444e-9413-d6f673aa57ff}</destination>
+		</relationship>
+		<relationship name="automationPoints">
+			<destination>{b6ceab2f-47d6-48e3-b3d7-f15ce22b4466}</destination>
+			<destination>{1bdded43-6eda-43f9-a1aa-016d063aa111}</destination>
+			<destination>{6e5ffbb3-7a0b-4fc0-8a12-a2626e0b946a}</destination>
+			<destination>{86e69fef-268a-41bb-bc10-1c04edc6d674}</destination>
+			<destination>{f0be1322-f203-4505-8476-7225c3e15328}</destination>
+			<destination>{d96a4bd1-965f-4ce1-af88-15d8ec6c7b66}</destination>
+			<destination>{dedca18a-83e5-4584-b9c6-fdb166779a54}</destination>
+			<destination>{663de5a7-b6cc-4ff4-8a65-fd91b05fc163}</destination>
+		</relationship>
+	</object>
+	<object class="AutomationPoint" id="{b6ceab2f-47d6-48e3-b3d7-f15ce22b4466}">
+		<property name="position">
+			<value>10</value>
+		</property>
+		<property name="value">
+			<value>1</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{1bdded43-6eda-43f9-a1aa-016d063aa111}">
+		<property name="position">
+			<value>7</value>
+		</property>
+		<property name="value">
+			<value>1</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{6e5ffbb3-7a0b-4fc0-8a12-a2626e0b946a}">
+		<property name="position">
+			<value>9</value>
+		</property>
+		<property name="value">
+			<value>1</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{86e69fef-268a-41bb-bc10-1c04edc6d674}">
+		<property name="position">
+			<value>0</value>
+		</property>
+		<property name="value">
+			<value>0</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{f0be1322-f203-4505-8476-7225c3e15328}">
+		<property name="position">
+			<value>6</value>
+		</property>
+		<property name="value">
+			<value>1</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{d96a4bd1-965f-4ce1-af88-15d8ec6c7b66}">
+		<property name="position">
+			<value>2</value>
+		</property>
+		<property name="value">
+			<value>1</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{dedca18a-83e5-4584-b9c6-fdb166779a54}">
+		<property name="position">
+			<value>8</value>
+		</property>
+		<property name="value">
+			<value>1</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{663de5a7-b6cc-4ff4-8a65-fd91b05fc163}">
+		<property name="position">
+			<value>1</value>
+		</property>
+		<property name="value">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

@@ -1,0 +1,10 @@
+#FMOD Project .gitignore
+
+# Ignore user preferences since its user dependent
+.user/
+
+# Ignore the cache folder since its updated locally
+.cache/
+
+# Ignore unsaved crash data
+.unsaved/
