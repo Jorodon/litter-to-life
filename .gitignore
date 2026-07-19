@@ -42,7 +42,7 @@
 # Visual Studio/VS Code cache directory
 .vs/
 .vscode/
-litter-to-life.sln*
+*.slnx
 
 # Gradle cache directory
 .gradle/
