@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="AudioFile" id="{9a86c673-17de-41e3-b4a8-7eafa31da655}">
 		<property name="assetPath">
-			<value>SFX/Trash/trashbag_walking_2.wav</value>
+			<value>SFX/Interactibles/Trash Bag/trashbag_walking_2.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>44.0999985</value>
