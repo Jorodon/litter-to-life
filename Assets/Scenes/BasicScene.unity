@@ -587,6 +587,8 @@ MonoBehaviour:
       Data3: 7004075
       Data4: 2066123558
     Path: event:/Music/Track 2 - A Wonderous World
+  distance: 1
+  musicState: 0
 --- !u!4 &1594334907
 Transform:
   m_ObjectHideFlags: 0
