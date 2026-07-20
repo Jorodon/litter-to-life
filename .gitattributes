@@ -173,3 +173,7 @@ Packages/packages-lock.json linguist-generated
 *.terrain.asset filter=lfs diff=lfs merge=lfs -text
 LightingData.asset filter=lfs diff=lfs merge=lfs -text
 NavMesh-*.asset filter=lfs diff=lfs merge=lfs -text
+
+# FMOD
+Assets/Plugins/FMOD/**/*.bundle text eol=lf
+Assets/Plugins/FMOD/**/Info.plist text eol=lf

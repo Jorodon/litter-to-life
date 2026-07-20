@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="EncodableAsset" id="{db3094a0-61c4-4e44-b18b-068c69fc7e38}">
+		<property name="assetPath">
+			<value>SFX/Interactibles/Grabber/</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{c2c0debf-0c45-4f6d-82e8-12d57942ec31}</destination>
+		</relationship>
+	</object>
+</objects>
