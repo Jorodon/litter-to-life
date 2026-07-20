@@ -1553,7 +1553,7 @@
 	</object>
 	<object class="AutomationPoint" id="{d42d25d7-3359-436d-9da2-cc50027836a1}">
 		<property name="position">
-			<value>0.70000000000000007</value>
+			<value>0.5</value>
 		</property>
 		<property name="value">
 			<value>0</value>
@@ -1561,10 +1561,10 @@
 	</object>
 	<object class="AutomationPoint" id="{af23db5e-f571-4121-bdfa-9c8e8d05380c}">
 		<property name="position">
-			<value>0.5</value>
+			<value>0.25</value>
 		</property>
 		<property name="value">
-			<value>-10</value>
+			<value>-16</value>
 		</property>
 	</object>
 	<object class="Automator" id="{d8a44724-f828-447b-9270-9fd01a8db5c8}">
@@ -1643,7 +1643,7 @@
 	</object>
 	<object class="AutomationPoint" id="{d2cbf5d3-92c7-4d6f-89d4-d43ebdbc5aa3}">
 		<property name="position">
-			<value>0.45000000000000001</value>
+			<value>0.25</value>
 		</property>
 		<property name="value">
 			<value>0</value>
@@ -1764,7 +1764,7 @@
 	</object>
 	<object class="AutomationPoint" id="{71ce3cbe-dcd7-43a5-8450-e8686630e105}">
 		<property name="position">
-			<value>0.60000000000000009</value>
+			<value>0.35000000000000003</value>
 		</property>
 		<property name="value">
 			<value>0</value>
@@ -1807,7 +1807,7 @@
 	</object>
 	<object class="AutomationPoint" id="{fea33bfa-6380-4189-a475-b4d52f1a3d1b}">
 		<property name="position">
-			<value>0.70000000000000007</value>
+			<value>0.45000000000000001</value>
 		</property>
 		<property name="value">
 			<value>-10</value>
@@ -1824,7 +1824,7 @@
 			<value>-80</value>
 		</property>
 		<property name="curveShape">
-			<value>0.27743268</value>
+			<value>-0.0282901395</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{8e8a2347-336d-4ff4-ad58-50afb30dceae}">
@@ -1837,7 +1837,7 @@
 	</object>
 	<object class="AutomationPoint" id="{c8ae7359-e63e-4481-b8be-9919f28241b9}">
 		<property name="position">
-			<value>0.40000000000000002</value>
+			<value>0.35000000000000003</value>
 		</property>
 		<property name="value">
 			<value>0</value>
@@ -1845,7 +1845,7 @@
 	</object>
 	<object class="AutomationPoint" id="{f0e30610-903a-431d-b1b8-b15fcd50db7a}">
 		<property name="position">
-			<value>0.10000000000000001</value>
+			<value>0.089999999999999997</value>
 		</property>
 		<property name="value">
 			<value>-10</value>
@@ -1856,10 +1856,10 @@
 	</object>
 	<object class="AutomationPoint" id="{914a4c8c-f967-49d6-bd55-e002d5f21f83}">
 		<property name="position">
-			<value>0.40000000000000002</value>
+			<value>0.20000000000000001</value>
 		</property>
 		<property name="value">
-			<value>-58</value>
+			<value>-80</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{36e5770b-71ba-4746-abcd-ded3f0cad766}">
