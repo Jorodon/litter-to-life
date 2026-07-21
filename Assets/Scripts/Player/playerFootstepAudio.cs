@@ -1,55 +1,46 @@
 using UnityEngine;
 using FMODUnity;
-using FMOD.Studio;
+using Game.Audio;
 
-public class playerFootstepAudio : MonoBehaviour
+namespace Game.Player
 {
-
-    public static playerFootstepAudio Instance { get; private set; }
-
-    [Header("Footstep Sounds")]
-    [SerializeField] private EventReference footstepReference;
-    private EventInstance footstepInstance;
-
-    private void Awake()
+    public class playerFootstepAudio : MonoBehaviour
     {
-        if (Instance != null && Instance != this)
+        [Header("Footstep Sounds")]
+        [SerializeField] private EventReference footstepReference;
+
+        private PersistentAudioInstance footstepAudioWrapper;
+
+        // Initializes the base class to create wrapper functions
+        public void Awake()
         {
-            Destroy(gameObject);
-            return;
+            footstepAudioWrapper = new PersistentAudioInstance(footstepReference, transform);
         }
 
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
+        // Starts playing footstep sounds
+        public void StartFootsteps()
+        {
+            footstepAudioWrapper.SetGlobalMusicParameter("isWalking", 1);
+            footstepAudioWrapper.PlayAudio();
+        }
 
-    public void Start()
-    {
-        footstepInstance = RuntimeManager.CreateInstance(footstepReference);
-        RuntimeManager.AttachInstanceToGameObject(footstepInstance, gameObject);
-    }
+        // Changes footstep sound surface parameter
+        public void ChangeGroundMaterial(string material)
+        {
+            footstepAudioWrapper.SetMusicParameter("Surface", material);
+        }
 
-    public void StartFootsteps()
-    {
-        footstepInstance.start();
-        RuntimeManager.StudioSystem.setParameterByName("isWalking", 1.0f);
-    }
+        // Stops playing footstep sounds
+        public void StopFootsteps()
+        {
+            footstepAudioWrapper.SetGlobalMusicParameter("isWalking", 0);
+            footstepAudioWrapper.Stop();
+        }
 
-    public void ChangeGroundMaterial(string material)
-    {
-        footstepInstance.setParameterByNameWithLabel("Surface", material);
-    }
-
-    public void StopFootsteps()
-    {
-        RuntimeManager.StudioSystem.setParameterByName("isWalking", 0);
-        footstepInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-    }
-
-    private void OnDestroy()
-    {
-        StopFootsteps();
-        footstepInstance.release();
+        // Releases the instance
+        private void OnDestroy()
+        {
+            footstepAudioWrapper.Release();
+        }
     }
 }
-

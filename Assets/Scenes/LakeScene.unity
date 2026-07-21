@@ -278,7 +278,7 @@ GameObject:
   - component: {fileID: 139766768}
   - component: {fileID: 139766770}
   - component: {fileID: 139766771}
-  - component: {fileID: 139766772}
+  - component: {fileID: 139766774}
   - component: {fileID: 139766773}
   m_Layer: 0
   m_Name: Player
@@ -372,25 +372,6 @@ MonoBehaviour:
     MaterialName: Dirt
   - Albedo: {fileID: 2800000, guid: 1fd39aa71de6246fd9572d7ca4868589, type: 3}
     MaterialName: Wood
---- !u!114 &139766772
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 139766767}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1026bc44e3a824a43b4a371490b96f41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::playerFootstepAudio
-  footstepReference:
-    Guid:
-      Data1: -383242213
-      Data2: 1148879563
-      Data3: 88448681
-      Data4: -1084561202
-    Path: event:/Character/Footsteps
 --- !u!114 &139766773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -405,6 +386,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioListener
   nonRigidbodyVelocity: 0
   attenuationObject: {fileID: 0}
+--- !u!114 &139766774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 139766767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1026bc44e3a824a43b4a371490b96f41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Player.playerFootstepAudio
+  footstepReference:
+    Guid:
+      Data1: -383242213
+      Data2: 1148879563
+      Data3: 88448681
+      Data4: -1084561202
+    Path: event:/Character/Footsteps
 --- !u!1 &176994037
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,27 +1,32 @@
 using UnityEngine;
 using System.Collections;
-using System.Linq.Expressions;
+using Game.Player;
 
 public class playerGroundDetector : MonoBehaviour
 {
 
+    // Layer used for object surfaces and terrain
     [SerializeField]
     private LayerMask GroundLayer;
-    private CharacterController Controller;
 
+    // Class containing pairs of materials and correpsonding surface types
     [SerializeField]
     private TextureMaterial[] TextureMaterials;
 
+    private CharacterController Controller;
     private string currentMaterial;
+
+    // Instance of player footstep audio
+    playerFootstepAudio playerFootstepAudioInstance;
 
     private void Awake()
     {
         Controller = GetComponent<CharacterController>();
+        playerFootstepAudioInstance = GetComponent<playerFootstepAudio>();
     }
 
     private void Start()
     {
-        playerFootstepAudio.Instance.Start();
         StartCoroutine(CheckGround());
     }
 
@@ -51,7 +56,7 @@ public class playerGroundDetector : MonoBehaviour
 
             else
             {
-                playerFootstepAudio.Instance.StopFootsteps();
+                playerFootstepAudioInstance.StopFootsteps();
             }
 
             yield return null;
@@ -110,10 +115,10 @@ public class playerGroundDetector : MonoBehaviour
         {
             Debug.Log("Changed audio:");
             Debug.Log(newMaterial);
-            playerFootstepAudio.Instance.ChangeGroundMaterial(newMaterial);
+            playerFootstepAudioInstance.ChangeGroundMaterial(newMaterial);
             currentMaterial = newMaterial;
         }
-        playerFootstepAudio.Instance.StartFootsteps();
+        playerFootstepAudioInstance.StartFootsteps();
     }
 
     //Custom serialized class for defining and storing textures and surface names
