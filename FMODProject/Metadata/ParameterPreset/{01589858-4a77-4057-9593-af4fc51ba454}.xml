@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="ParameterPreset" id="{01589858-4a77-4057-9593-af4fc51ba454}">
+		<property name="name">
+			<value>isFrogsCroaking</value>
+		</property>
+		<relationship name="folder">
+			<destination>{399b7b6b-cc31-4dc2-bad4-3c568911553a}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{24aaa3b2-091e-4369-aa1c-f61d1346f571}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{24aaa3b2-091e-4369-aa1c-f61d1346f571}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+		<relationship name="modulators">
+			<destination>{f095db29-18eb-4579-a9de-3c7f74341057}</destination>
+		</relationship>
+	</object>
+	<object class="SeekModulator" id="{f095db29-18eb-4579-a9de-3c7f74341057}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>cursorPosition</value>
+		</property>
+		<property name="speedAscending">
+			<value>0.14000000059604645</value>
+		</property>
+	</object>
+</objects>

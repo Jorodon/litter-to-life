@@ -6,12 +6,14 @@ public class backgroundMusicManager : MonoBehaviour
 {
     // Allows other scripts to access music manager, but not modify values
     public static backgroundMusicManager Instance { get; private set; }
-
+    public int musicState = 0;
 
     // Serialized field to get music event
     [Header("Background Music Event")]
     [SerializeField] private EventReference musicEventReference;
     private EventInstance musicEventInstance;
+
+    public MonoBehaviour targetScript;
 
     // Runs before Start() to prevent duplicates, set a single Instance, and ensure it survives across scenes
     private void Awake()
@@ -31,12 +33,25 @@ public class backgroundMusicManager : MonoBehaviour
     {
         musicEventInstance = RuntimeManager.CreateInstance(musicEventReference);
         musicEventInstance.start();
+
+        targetScript.enabled = false;
     }
 
     // Allows changing the parameter of the selected music event
     public void SetMusicParameter(string parameterName, float value)
     {
         musicEventInstance.setParameterByName(parameterName, value);
+    }
+
+    public void IncreaseMusicState()
+    {
+        musicState++;
+        SetGlobalMusicParameter("Music State", musicState);
+
+        if (musicState == 5)
+        {
+            targetScript.enabled = true;
+        }
     }
 
     // Allows changing the parameter of the selected music event
