@@ -36,7 +36,7 @@ public class musicTest : MonoBehaviour
         // This pauses the execution for the given seconds
         yield return new WaitForSeconds(delayInSeconds);
 
-        Debug.LogError("Changing parameters...");
+        Debug.Log("Changing parameters...");
         // backgroundMusicManager.Instance.SetGlobalMusicParameter("Distance", 0.5f);
         // backgroundMusicManager.Instance.SetGlobalMusicParameter("Music State", 4);
 

@@ -13,7 +13,7 @@ public class musicProximity : MonoBehaviour
         float currentDistance = Vector3.Distance(transform.position, playerTransform.position);
         float clampDistance = Mathf.Clamp(currentDistance, 0f, maxDistance);
         float normalizedDistance = 0f + Mathf.InverseLerp(0f, maxDistance, clampDistance);
-        Debug.Log($"Distance to player: {currentDistance} meters");
+        //Debug.Log($"Distance to player: {currentDistance} meters");
         backgroundMusicManager.Instance.SetGlobalMusicParameter("Distance", normalizedDistance);
     }
 }
