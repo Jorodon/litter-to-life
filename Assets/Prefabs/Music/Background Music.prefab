@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7748747299075487492
+--- !u!1 &333363229050756547
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2264108202941469857}
-  - component: {fileID: 1355869274940135394}
+  - component: {fileID: 6412799906584205176}
+  - component: {fileID: 8767980118501948402}
   m_Layer: 0
   m_Name: Background Music
   m_TagString: Untagged
@@ -17,33 +17,33 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2264108202941469857
+--- !u!4 &6412799906584205176
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7748747299075487492}
+  m_GameObject: {fileID: 333363229050756547}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.43165, y: -0, z: 0.77644}
+  m_LocalPosition: {x: 44.12339, y: 0, z: 59.58461}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1355869274940135394
+--- !u!114 &8767980118501948402
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7748747299075487492}
+  m_GameObject: {fileID: 333363229050756547}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36d33dc063c1ecc4b9ce9c636eda9cef, type: 3}
+  m_Script: {fileID: 11500000, guid: 93b6fdbb0a8285840b64307cbe45039c, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::backgroundMusicManager
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Audio.Music.backgroundMusicTest
   musicEventReference:
     Guid:
       Data1: 1653873214

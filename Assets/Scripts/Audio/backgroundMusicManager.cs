@@ -1,8 +1,7 @@
 using UnityEngine;
 using FMODUnity;
-using Game.Audio;
 
-namespace Game.Music
+namespace Game.Audio.Music
 {
     public class backgroundMusicManager : PersistentAudioInstance
     {

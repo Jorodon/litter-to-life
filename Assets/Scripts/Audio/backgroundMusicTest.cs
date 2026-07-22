@@ -1,7 +1,7 @@
 using UnityEngine;
 using FMODUnity;
 
-namespace Game.Music
+namespace Game.Audio.Music
 {
     public class backgroundMusicTest : MonoBehaviour
     {

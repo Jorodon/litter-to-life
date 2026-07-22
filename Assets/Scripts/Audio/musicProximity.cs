@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Game.Music.Test
+namespace Game.Audio.Music.Test
 {
     public class musicProximity : MonoBehaviour
     {

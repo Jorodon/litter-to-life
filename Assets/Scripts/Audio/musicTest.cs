@@ -2,9 +2,8 @@ using UnityEngine;
 using System.Collections;
 using FMODUnity;
 using FMOD.Studio;
-using Game.Music;
 
-namespace Game.Music.Test
+namespace Game.Audio.Music.Test
 {
     public class musicTest : MonoBehaviour
     {
