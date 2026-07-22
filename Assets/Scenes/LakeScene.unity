@@ -513,6 +513,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 99506194794456200, guid: c28ce1c83ed4b97bea65a2b4ea49148b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 99506194794456200, guid: c28ce1c83ed4b97bea65a2b4ea49148b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 99506194794456200, guid: c28ce1c83ed4b97bea65a2b4ea49148b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 99506194794456200, guid: c28ce1c83ed4b97bea65a2b4ea49148b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.059
+      objectReference: {fileID: 0}
+    - target: {fileID: 99506194794456200, guid: c28ce1c83ed4b97bea65a2b4ea49148b, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 683045100231926802, guid: c28ce1c83ed4b97bea65a2b4ea49148b, type: 3}
       propertyPath: m_Name
       value: XR
@@ -523,7 +543,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 692190093234015714, guid: c28ce1c83ed4b97bea65a2b4ea49148b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.23796
+      value: 5.31
       objectReference: {fileID: 0}
     - target: {fileID: 692190093234015714, guid: c28ce1c83ed4b97bea65a2b4ea49148b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -565,6 +585,10 @@ PrefabInstance:
       propertyPath: m_StepOffset
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5928244562992119073, guid: c28ce1c83ed4b97bea65a2b4ea49148b, type: 3}
+      propertyPath: m_IncludeLayers.m_Bits
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 8373815028908687849, guid: c28ce1c83ed4b97bea65a2b4ea49148b, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.5
@@ -573,23 +597,91 @@ PrefabInstance:
       propertyPath: m_DesiredCursorLockMode
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 8426417407852414537, guid: c28ce1c83ed4b97bea65a2b4ea49148b, type: 3}
-      propertyPath: m_KeyboardBodyTranslateMultiplier
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 692190093234015714, guid: c28ce1c83ed4b97bea65a2b4ea49148b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 783780722}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1863209500867372890, guid: c28ce1c83ed4b97bea65a2b4ea49148b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 309493297}
   m_SourcePrefab: {fileID: 100100000, guid: c28ce1c83ed4b97bea65a2b4ea49148b, type: 3}
 --- !u!4 &309493293 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2326396208317459572, guid: c28ce1c83ed4b97bea65a2b4ea49148b, type: 3}
   m_PrefabInstance: {fileID: 309493292}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &309493294 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3525072211394687867, guid: c28ce1c83ed4b97bea65a2b4ea49148b, type: 3}
+  m_PrefabInstance: {fileID: 309493292}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309493295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fa7b4195685c3846be746c74f0ab2f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.XR.Interaction.Toolkit::UnityEngine.XR.Interaction.Toolkit.Locomotion.LocomotionMediator
+--- !u!1 &309493295 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1863209500867372890, guid: c28ce1c83ed4b97bea65a2b4ea49148b, type: 3}
+  m_PrefabInstance: {fileID: 309493292}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &309493296 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4469462121750960490, guid: c28ce1c83ed4b97bea65a2b4ea49148b, type: 3}
+  m_PrefabInstance: {fileID: 309493292}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &309493297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309493295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626a4d6723d6ad24b9aebb811ad5a3dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.XR.Interaction.Toolkit::UnityEngine.XR.Interaction.Toolkit.Locomotion.Movement.ContinuousMoveProvider
+  m_Mediator: {fileID: 309493294}
+  m_TransformationPriority: 0
+  m_MoveSpeed: 10
+  m_InAirControlModifier: 0
+  m_EnableStrafe: 1
+  m_EnableFly: 0
+  m_ForwardSource: {fileID: 309493296}
+  m_LeftHandMoveInput:
+    m_InputSourceMode: 2
+    m_InputAction:
+      m_Name: Left Hand Move
+      m_Type: 0
+      m_ExpectedControlType: Vector2
+      m_Id: 80c3bec7-3522-4ddd-afa4-5234c2f4bc09
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_InputActionReference: {fileID: 6972639530819350904, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+    m_ObjectReferenceObject: {fileID: 0}
+    m_ManualValue: {x: 0, y: 0}
+  m_RightHandMoveInput:
+    m_InputSourceMode: 2
+    m_InputAction:
+      m_Name: Right Hand Move
+      m_Type: 0
+      m_ExpectedControlType: Vector2
+      m_Id: bac38016-d12a-4a04-9332-199215670ace
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_InputActionReference: {fileID: -8198699208435500284, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+    m_ObjectReferenceObject: {fileID: 0}
+    m_ManualValue: {x: 0, y: 0}
+  m_UseGravity: 1
 --- !u!4 &340268485 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 692190093234015714, guid: c28ce1c83ed4b97bea65a2b4ea49148b, type: 3}
@@ -3622,6 +3714,14 @@ PrefabInstance:
     - target: {fileID: 4853355153255774997, guid: 0952eb2702a5a48e196550cb92652f13, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7854440319476293186, guid: 0952eb2702a5a48e196550cb92652f13, type: 3}
+      propertyPath: m_IncludeLayers.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7971225788211416218, guid: 0952eb2702a5a48e196550cb92652f13, type: 3}
+      propertyPath: m_IncludeLayers.m_Bits
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
