@@ -1,8 +1,7 @@
 using UnityEngine;
 using FMODUnity;
-using Game.Audio;
 
-namespace Game.Player
+namespace Game.Audio
 {
     public class playerFootstepAudio : MonoBehaviour
     {
@@ -12,7 +11,7 @@ namespace Game.Player
         private PersistentAudioInstance footstepAudioWrapper;
 
         // Initializes the base class to create wrapper functions
-        public void Awake()
+        private void Awake()
         {
             footstepAudioWrapper = new PersistentAudioInstance(footstepReference, transform);
         }
