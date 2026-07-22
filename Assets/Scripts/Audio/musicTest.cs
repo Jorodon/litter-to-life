@@ -2,48 +2,46 @@ using UnityEngine;
 using System.Collections;
 using FMODUnity;
 using FMOD.Studio;
+using Game.Music;
 
-public class musicTest : MonoBehaviour
+namespace Game.Music.Test
 {
-
-    // Serialized field to get music event
-    [Header("New Music Event")]
-    [SerializeField] private EventReference musicEventReference;
-    private EventInstance musicEventInstance;
-
-    [SerializeField] [Range(0f, 1.0f)]
-    private float distance = 1.0f;
-
-    [SerializeField] [Range(0, 5)]
-    private int musicState = 0;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public class musicTest : MonoBehaviour
     {
-        Debug.Log("Playing initial music sample.");
-        StartCoroutine(ExecuteAfterDelay(2.0f)); 
 
-    }
+        // Serialized field to get music event
+        [Header("New Music Event")]
+        [SerializeField] private EventReference musicEventReference;
+        private EventInstance musicEventInstance;
 
-    IEnumerator ExecuteAfterDelay(float delayInSeconds)
-    {
-        
-        if (backgroundMusicManager.Instance == null) 
+        // Start is called once before the first execution of Update after the MonoBehaviour is created
+        void Start()
         {
-            Debug.LogError("The Music Manager Instance is missing from the scene!");
+            Debug.Log("Playing initial music sample.");
+            StartCoroutine(ExecuteAfterDelay(2.0f)); 
+
         }
 
-        // This pauses the execution for the given seconds
-        yield return new WaitForSeconds(delayInSeconds);
+        IEnumerator ExecuteAfterDelay(float delayInSeconds)
+        {
+            
+            // if (backgroundMusicManager.Instance == null) 
+            // {
+            //     Debug.LogError("The Music Manager Instance is missing from the scene!");
+            // }
 
-        Debug.Log("Changing parameters...");
-        // backgroundMusicManager.Instance.SetGlobalMusicParameter("Distance", 0.5f);
-        // backgroundMusicManager.Instance.SetGlobalMusicParameter("Music State", 4);
+            // This pauses the execution for the given seconds
+            yield return new WaitForSeconds(delayInSeconds);
 
-    }
+            Debug.Log("Changing parameters...");
+            // backgroundMusicManager.Instance.SetGlobalMusicParameter("Distance", 0.5f);
+            // backgroundMusicManager.Instance.SetGlobalMusicParameter("Music State", 4);
 
-    void Update() {
-        backgroundMusicManager.Instance.SetGlobalMusicParameter("Distance", distance);
-        backgroundMusicManager.Instance.SetGlobalMusicParameter("Music State", musicState);
+        }
+
+        void Update() {
+            //backgroundMusicManager.Instance.SetGlobalMusicParameter("Distance", distance);
+           // backgroundMusicManager.Instance.SetGlobalMusicParameter("Music State", musicState);
+        }
     }
 }

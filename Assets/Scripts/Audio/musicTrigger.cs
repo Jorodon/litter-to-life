@@ -1,15 +1,17 @@
 using UnityEngine;
-using FMODUnity;
 
-public class musicTrigger : MonoBehaviour
+namespace Game.Music.Test
 {
-
-    private void OnTriggerEnter(Collider other)
+    public class musicTrigger : MonoBehaviour
     {
-        if (other.CompareTag("Player"))
+        // Increases the music state of background music when trigger is hit by player
+        private void OnTriggerEnter(Collider other)
         {
-            backgroundMusicManager.Instance.IncreaseMusicState();
+            if (other.CompareTag("Player"))
+            {
+                backgroundMusicTest.Instance.IncreaseMusicState();
+            }
         }
+            
     }
-        
 }
