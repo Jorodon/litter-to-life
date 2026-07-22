@@ -25,6 +25,16 @@ namespace Game.Audio
 
         }
 
+        //Updates position of audio
+        public virtual void Update()
+        {
+            if (!IsPlaying)
+            {
+                return;
+            }
+            UpdatePosition();
+        }
+
         //Checks if audio is not playing and plays audio
         public virtual void PlayAudio()
         {
@@ -71,6 +81,20 @@ namespace Game.Audio
 
             instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
             IsPlaying = false;
+        }
+
+        // Updates position (based on parent object transform)
+        protected void UpdatePosition()
+        {
+            if (transform == null) return;
+            instance.set3DAttributes(RuntimeUtils.To3DAttributes(transform));
+        }
+
+        // Updates position (based on input vector)
+        public virtual void UpdatePosition(Vector3 position)
+        {
+            if (transform == null) return;
+            instance.set3DAttributes(RuntimeUtils.To3DAttributes(position));
         }
 
         // Stops audio playback and releases FMOD instance
