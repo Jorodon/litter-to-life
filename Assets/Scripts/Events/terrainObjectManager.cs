@@ -1,29 +1,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Game.Objective;
+using System.Runtime.CompilerServices;
 
 namespace Game.Environment
 {
     public class terrainObjectManager : MonoBehaviour
     {
         [Header("Parent Terrain Object")]
-        public GameObject terrainParent;
+        private GameObject terrainParent;
 
         private Terrain targetTerrain;
 
+        // List of terrain scriptable objects
+        [SerializeField]
+        private List<terrainDetailSO> terrainSOList;
+
         private List<terrainHandler> terrainList = new List<terrainHandler>();
 
-        [SerializeField] private trashScriptableObject mainObjective;
-
         public int treesToGenerate = 50;
-
-        [SerializeField]
-        public List<GameObject> grassObjects = new List<GameObject>();
-        //public int grassToGenerate = 50;
-
-        [SerializeField]
-        public List<GameObject> flowerObjects = new List<GameObject>();
-        //public int flowersToGenerate = 50;
         
         // Exclusion settings for trees (do not paint trees on these materials)
         [Header("Exclusion Settings")]
@@ -31,13 +26,10 @@ namespace Game.Environment
         [Range(0f, 1f)]
         public float exclusionThreshold = 0.1f;
 
-        // [SerializeField]
-        // private List<ExclusionZones> exclusionZones = new List<ExclusionZones>();
-
-
         // Caches all terrain immediately
         private void Awake()
         {
+            terrainParent = gameObject;
             if (targetTerrain == null) 
             {
                 targetTerrain = Terrain.activeTerrain;
@@ -49,9 +41,9 @@ namespace Game.Environment
         private void Start()
         {
             // FOR TESTING : Generates trees upon starting game
-            GenerateAllTrees();
+            //GenerateAllTrees();
             //GenerateAllFlowers();
-            RemoveAllTerrainDetails(flowerObjects);
+            ClearTerrainDetailsOnStartup();
         }
 
         // Listens for a milestone to be reached
@@ -66,12 +58,34 @@ namespace Game.Environment
             trashCollectionManager.OnMilestoneCompletion -= HandleMilestoneCompletion;
         }
 
-        // Checks that applicable objective was completed, then increases music state
+        // Checks that applicable objective was completed, then adds corresponding 
         private void HandleMilestoneCompletion(string objectiveID)
         {
-            if (mainObjective != null && objectiveID == mainObjective.objectiveID)
+            if (terrainSOList == null) return;
+
+            for (int i = 0; i < terrainSOList.Count; i++)
             {
-                SelectivelyRestoreAllCache(flowerObjects);
+                if (objectiveID == terrainSOList[i].objectiveID)
+                {
+                    switch (terrainSOList[i].objectName)
+                    {
+                        case "flowers":
+                            SelectivelyRestoreAllCache(terrainSOList[i].relaventObjects);
+                            break;
+                        case "trees":
+                            GenerateAllTrees();
+                            break;
+                        case "mushrooms":
+                            //TO-DO : Generate mushrooms
+                            break;
+                        case "grass":
+                            //TO-DO : Generate low grass
+                            break;
+                        case "high-grass":
+                            //TO-DO : Generate high grass
+                            break;
+                    }
+                }
             }
         }
 
@@ -84,12 +98,28 @@ namespace Game.Environment
             }
         }
 
-        public void RemoveAllTerrainDetails(List<GameObject> detailObjects)
+        // Clears terrain of details when given list of game objects
+        public void ClearTerrainDetails(List<GameObject> detailObjects)
         {
             foreach (terrainHandler instance in terrainList)
             {
-                instance.RemoveTerrainDetails(detailObjects);
+                instance.ClearSingleTerrainDetails(detailObjects);
             }
+        }
+
+        // Clears terrain of applicable details from SO list on startup
+        public void ClearTerrainDetailsOnStartup()
+        {
+            List<GameObject> objectiveObjects = new List<GameObject>();
+
+            foreach (terrainDetailSO terrainDetail in terrainSOList)
+            {
+                foreach (GameObject prefab in terrainDetail.relaventObjects)
+                {
+                    objectiveObjects.Add(prefab);
+                }
+            }
+            ClearTerrainDetails(objectiveObjects);
         }
 
         // Selectively restores certain detail objects from cache

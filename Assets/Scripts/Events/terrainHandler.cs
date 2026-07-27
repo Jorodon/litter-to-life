@@ -173,7 +173,7 @@ namespace Game.Environment
         }
 
         // Removes all instances of certain detail meshes from the terrain object
-        public void RemoveTerrainDetails(List<GameObject> targetObjects)
+        public void ClearSingleTerrainDetails(List<GameObject> targetObjects)
         {
             int detailRes = terrainData.detailResolution;
             int[,] emptyArray = new int[detailRes, detailRes]; // Fresh array full of 0s
