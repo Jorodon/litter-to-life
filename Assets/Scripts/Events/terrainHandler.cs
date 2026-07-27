@@ -10,6 +10,8 @@ namespace Game.Environment
         private TerrainData terrainData;
         private Terrain terrain;
 
+        public List<Vector3> debugFlowerPositions = new List<Vector3>();
+
         // Constructor : Sets terrain object and terrainData for targetTerrain, and caches current terrain data
         public terrainHandler(Terrain targetTerrain)
         {
@@ -120,13 +122,85 @@ namespace Game.Environment
             terrainData.SetTreeInstances(currentInstances.ToArray(), true);
         }
 
-        ~terrainHandler()
+        // public void GenerateGrass()
+        // {
+            
+        // }
+
+        // Helper function : finds index of detail prototype that matches prefab
+        public int FindPrototypeIndex(GameObject prefab)
         {
-            RestoreCachedTerrain();
+            if (prefab == null || terrainData == null) return -1;
+
+            DetailPrototype[] existingPrototypes = terrainData.detailPrototypes;
+
+            for (int i = 0; i < existingPrototypes.Length; i++)
+            {
+                DetailPrototype proto = existingPrototypes[i];
+                if (proto.usePrototypeMesh && proto.prototype == prefab)
+                {
+                    return i;
+                }
+            }
+
+            return -1;
         }
 
-    }
+        // Selectively restores detail mesh from cache
+        public void SelectivelyRestoreCache(List<GameObject> targetObjects)
+        {
+            foreach (GameObject targetObject in targetObjects)
+            {
+                if (targetObject == null) continue;
 
+                Renderer r = targetObject.GetComponentInChildren<Renderer>();
+                if (r != null && r.sharedMaterial != null)
+                {
+                    r.sharedMaterial.enableInstancing = true;
+                }
+
+                int protoIndex = FindPrototypeIndex(targetObject);
+
+                if (protoIndex == -1)
+                {
+                    Debug.LogWarning($"[TerrainHandler] Prefab '{targetObject.name}' is NOT registered on the Terrain asset!\n" +
+                                     $"Add it to the Terrain's 'Paint Details' tab in the Inspector before running again.");
+                    continue;
+                }
+
+                terrainData.SetDetailLayer(0, 0, protoIndex, terrainCache.cachedDetails[protoIndex]);
+            }
+        }
+
+        // Removes all instances of certain detail meshes from the terrain object
+        public void RemoveTerrainDetails(List<GameObject> targetObjects)
+        {
+            int detailRes = terrainData.detailResolution;
+            int[,] emptyArray = new int[detailRes, detailRes]; // Fresh array full of 0s
+
+            foreach (GameObject targetObject in targetObjects)
+            {
+                if (targetObject == null) continue;
+
+                Renderer r = targetObject.GetComponentInChildren<Renderer>();
+                if (r != null && r.sharedMaterial != null)
+                {
+                    r.sharedMaterial.enableInstancing = true;
+                }
+
+                int protoIndex = FindPrototypeIndex(targetObject);
+
+                if (protoIndex == -1)
+                {
+                    Debug.LogWarning($"[TerrainHandler] Prefab '{targetObject.name}' is NOT registered on the Terrain asset!\n" +
+                                     $"Add it to the Terrain's 'Paint Details' tab in the Inspector before running again.");
+                    continue;
+                }
+
+                terrainData.SetDetailLayer(0, 0, protoIndex, emptyArray);
+            }
+        }
+    }
 
     // Stores a cache of starting terrain data
     public class TerrainCache
@@ -137,4 +211,3 @@ namespace Game.Environment
         public int[][,] cachedDetails;
     }
 }
-
