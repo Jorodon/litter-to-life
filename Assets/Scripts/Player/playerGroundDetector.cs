@@ -1,12 +1,10 @@
 using UnityEngine;
-using System.Collections;
 using Game.Audio;
 
 namespace Game.Player
 {
     public class playerGroundDetector : MonoBehaviour
     {
-
         // Layer used for object surfaces and terrain
         [SerializeField]
         private LayerMask GroundLayer;
@@ -15,72 +13,131 @@ namespace Game.Player
         [SerializeField]
         private TextureMaterial[] TextureMaterials;
 
+        // Min velocity needed to trigger audio 
+        [SerializeField] private float characterVelocityThreshold = 0.2f;
+
+        // Variables for timer to determine how long player has to move or stop moving to trigger audio
+        [Header("Player Move Time Thresholds")]
+        [SerializeField] private float startDelay = 0.15f; 
+        [SerializeField] private float stopDelay = 0.1f; 
+        private float startDelayTimer = 0f;
+        private float stopDelayTimer = 0f;
+
+        // Player controller used for movement
         private CharacterController Controller;
+
+        // Audio script used to control footstep audio
+        private playerFootstepAudio playerFootstepAudioInstance;
+        
+
         private string currentMaterial;
+        private bool wasWalking = false;
+        private Vector3 lastPosition;
+        private float actualSpeed;
 
-        // Instance of player footstep audio
-        playerFootstepAudio playerFootstepAudioInstance;
-
+        // Gets components from attached object and sets position
         private void Awake()
         {
             Controller = GetComponent<CharacterController>();
             playerFootstepAudioInstance = GetComponent<playerFootstepAudio>();
+            lastPosition = transform.position;
         }
 
-        private void Start()
+        // Calculates position and speed every frame, then checks for movement on ground
+        private void Update()
         {
-            StartCoroutine(CheckGround());
+            Vector3 currentPos = new Vector3(transform.position.x, 0f, transform.position.z);
+            Vector3 previousPos = new Vector3(lastPosition.x, 0f, lastPosition.z);
+            actualSpeed = Vector3.Distance(currentPos, previousPos) / Time.deltaTime;
+            lastPosition = transform.position;
+
+            CheckGroundState();
         }
 
-        // Uses raycaster to check if player is touching ground
-        private IEnumerator CheckGround()
+        // Checks for player movement and ground material to control audio
+        private void CheckGroundState()
         {
-            while (true)
+            // Casts ray down to ground and returns true if hit
+            RaycastHit hit;
+            Vector3 raycastOrigin = transform.position + Vector3.up * 0.2f;
+            bool hitGround = Physics.Raycast(raycastOrigin, Vector3.down, out hit, 1.0f, GroundLayer);
+
+            // Checks if moving faster than min threshold
+            bool isSpeeding = actualSpeed > characterVelocityThreshold;
+            bool isMoving = false;
+
+            // Filters out sudden turns (snap turn) using timer
+            if (isSpeeding)
             {
-                RaycastHit hit;
-                if (Controller.isGrounded && Controller.velocity != Vector3.zero && Physics.Raycast(transform.position, Vector3.down, out hit, 5f, GroundLayer))
+                startDelayTimer += Time.deltaTime;
+                if (startDelayTimer >= startDelay)
                 {
-                    Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * hit.distance, Color.red);
+                    isMoving = true;
+                }
+            }
+            else
+            {
+                startDelayTimer = 0f;
+            }
 
-                    // Start coroutine for finding ground material of terrain
-                    if (hit.collider.TryGetComponent<Terrain>(out Terrain terrain))
-                    {
-                        yield return StartCoroutine(getTerrainMaterial(terrain, hit.point));
+            // Checks if player is moving and touching ground
+            if (isMoving && hitGround)
+            {
+                stopDelayTimer = stopDelay;
 
-                    }
+                string groundMaterial = null;
 
-                    // Start coroutine for finding ground material of renderer
-                    else if (hit.collider.TryGetComponent<Renderer>(out Renderer renderer))
-                    {
-                        yield return StartCoroutine(getRendererMaterial(renderer));
-                    }
+                // Fetches ground material
+                if (hit.collider.TryGetComponent<Terrain>(out Terrain terrain))
+                {
+                    groundMaterial = getTerrainMaterial(terrain, hit.point);
+                }
+                else if (hit.collider.TryGetComponent<Renderer>(out Renderer renderer))
+                {
+                    groundMaterial = getRendererMaterial(renderer);
                 }
 
-                else
+                // Starts footstep SFX if player was not already walking or changed surfaces
+                if (!wasWalking || currentMaterial != groundMaterial)
+                {
+                    ControlFootstepSfx(groundMaterial);
+                    wasWalking = true;
+                }
+            }
+
+            // Filters out sudden stops (lag, etc) using timer : stops footstep audio
+            else if (wasWalking)
+            {
+                stopDelayTimer -= Time.deltaTime;
+
+                if (stopDelayTimer <= 0f)
                 {
                     playerFootstepAudioInstance.StopFootsteps();
+                    wasWalking = false;
+                    currentMaterial = null;
                 }
-
-                yield return null;
             }
         }
-
-        // Gets the material of the renderer and applies that sound to footsteps
-        private IEnumerator getRendererMaterial(Renderer renderer)
+        
+        // Gets the material of the renderer and returns it
+        private string getRendererMaterial(Renderer renderer)
         {
-            foreach(TextureMaterial textureMaterial in TextureMaterials)
+            if (renderer == null || renderer.sharedMaterial == null) return null;
+
+            Texture mainTex = renderer.sharedMaterial.mainTexture;
+
+            foreach (TextureMaterial textureMaterial in TextureMaterials)
             {
-                if (textureMaterial.Albedo == renderer.sharedMaterial.GetTexture("_MainTex"))
+                if (textureMaterial.Albedo == mainTex)
                 {
-                    ControlFootstepSfx(textureMaterial.MaterialName);
-                    yield return new WaitForSeconds(0.5f);
-                    break;
+                    return textureMaterial.MaterialName;
                 }
             }
+            return null;
         }
 
-        // Gets the highest valued material of the terrain and applies that sound to footsteps
-        private IEnumerator getTerrainMaterial(Terrain terrain, Vector3 hitPoint)
+        // Gets the highest valued material of the terrain and returns it
+        private string getTerrainMaterial(Terrain terrain, Vector3 hitPoint)
         {
             Vector3 terrainPosition = hitPoint - terrain.transform.position;
             Vector3 splatMapPosition = new Vector3(terrainPosition.x / terrain.terrainData.size.x, 0, terrainPosition.z / terrain.terrainData.size.z);
@@ -91,7 +148,7 @@ namespace Game.Player
             float[,,] alphaMap = terrain.terrainData.GetAlphamaps(x, z, 1, 1);
 
             int activeIndex = 0;
-            for (int i = 1; i < alphaMap.Length; i++)
+            for (int i = 1; i < alphaMap.GetLength(2); i++)
             {
                 if (alphaMap[0, 0, i] > alphaMap[0, 0, activeIndex])
                 {
@@ -99,27 +156,21 @@ namespace Game.Player
                 }
             }
 
-            foreach(TextureMaterial textureMaterial in TextureMaterials)
+            foreach (TextureMaterial textureMaterial in TextureMaterials)
             {
                 if (textureMaterial.Albedo == terrain.terrainData.terrainLayers[activeIndex].diffuseTexture)
                 {
-                    ControlFootstepSfx(textureMaterial.MaterialName);
-                    yield return new WaitForSeconds(0.5f);
-                    break;
+                    return textureMaterial.MaterialName;
                 }
             }
+            return null;
         }
 
         //Controls changing footstep sounds
         public void ControlFootstepSfx(string newMaterial)
         {
-            if (currentMaterial != newMaterial)
-            {
-                Debug.Log("Changed audio:");
-                Debug.Log(newMaterial);
-                playerFootstepAudioInstance.ChangeGroundMaterial(newMaterial);
-                currentMaterial = newMaterial;
-            }
+            playerFootstepAudioInstance.ChangeGroundMaterial(newMaterial);
+            currentMaterial = newMaterial;
             playerFootstepAudioInstance.StartFootsteps();
         }
 

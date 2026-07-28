@@ -10,8 +10,6 @@ namespace Game.Audio
 
         protected Transform transform;
 
-        public bool IsPlaying {get; private set; }
-
         // Constructor: initializes class and creates FMOD instance
         public PersistentAudioInstance(EventReference eventReference, Transform attach)
         {
@@ -22,29 +20,37 @@ namespace Game.Audio
 
             transform = attach;
             instance = RuntimeManager.CreateInstance(eventReference);
-
+            UpdatePosition();
         }
 
         //Updates position of audio
         public virtual void Update()
         {
-            if (!IsPlaying)
-            {
-                return;
-            }
             UpdatePosition();
         }
 
         //Checks if audio is not playing and plays audio
         public virtual void PlayAudio()
         {
-            if (IsPlaying)
-            {
-                return;
-            }
+            if (!instance.isValid()) return;
 
-            instance.start();
-            IsPlaying = true;
+            instance.getPlaybackState(out PLAYBACK_STATE state);
+            if (state == PLAYBACK_STATE.STOPPED || state == PLAYBACK_STATE.STOPPING)
+            {
+                instance.start();
+            }
+        }
+
+        // Checks if audio is playing and stops playback
+        public virtual void Stop()
+        {
+            if (!instance.isValid()) return;
+
+            instance.getPlaybackState(out PLAYBACK_STATE state);
+            if (state != PLAYBACK_STATE.STOPPED)
+            {
+                instance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            }
         }
 
         // Sets a global parameter (continuous/discrete)
@@ -54,7 +60,7 @@ namespace Game.Audio
         }
 
         // Sets a global parameter (label)
-        public virtual void SetGlobalMusicParameter(string parameterName, string name )
+        public virtual void SetGlobalMusicParameter(string parameterName, string name)
         {
             RuntimeManager.StudioSystem.setParameterByNameWithLabel(parameterName, name);
         }
@@ -62,47 +68,35 @@ namespace Game.Audio
         // Sets a local parameter (continuous/discrete)
         public virtual void SetMusicParameter(string parameterName, float value)
         {
-            instance.setParameterByName(parameterName, value);
+            if (instance.isValid()) instance.setParameterByName(parameterName, value);
         }
 
         // Sets a local parameter (label)
         public virtual void SetMusicParameter(string parameterName, string name)
         {
-            instance.setParameterByNameWithLabel(parameterName, name);
+            if (instance.isValid()) instance.setParameterByNameWithLabel(parameterName, name);
         }
 
-        // Checks if audio is playing and stops playback
-        public virtual void Stop()
-        {
-            if (!IsPlaying)
-            {
-                return;
-            }
-
-            instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-            IsPlaying = false;
-        }
-
-        // Updates position (based on parent object transform)
+        // Updates position (based on parent object)
         protected void UpdatePosition()
         {
-            if (transform == null) return;
+            if (transform == null || !instance.isValid()) return;
             instance.set3DAttributes(RuntimeUtils.To3DAttributes(transform));
         }
 
         // Updates position (based on input vector)
         public virtual void UpdatePosition(Vector3 position)
         {
-            if (transform == null) return;
+            if (transform == null || !instance.isValid()) return;
             instance.set3DAttributes(RuntimeUtils.To3DAttributes(position));
         }
 
         // Stops audio playback and releases FMOD instance
         public virtual void Release()
         {
-            Stop();
+            if (!instance.isValid()) return;
+            instance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             instance.release();
         }
     }
-
 }
