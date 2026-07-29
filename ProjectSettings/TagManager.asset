@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Anchor
   - RegionManager
+  - Trash
+  - TrashCan
   layers:
   - Default
   - TransparentFX
@@ -14,6 +16,7 @@ TagManager:
   - Water
   - UI
   - Skybox
+  - Ground
   - 
   - 
   - 
