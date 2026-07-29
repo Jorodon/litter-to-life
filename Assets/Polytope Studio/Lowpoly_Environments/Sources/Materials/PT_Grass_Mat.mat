@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: PT_Grass_Mat
   m_Shader: {fileID: 4800000, guid: 233be0623027421449b81f7423abaf79, type: 3}
-  m_Parent: {fileID: 2100000, guid: 33e92b212d568b844ae30511d6c23987, type: 2}
+  m_Parent: {fileID: 2100000, guid: 6500324dfd690968e8dc6791664a5eb0, type: 2}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _CUSTOMWIND_ON
@@ -34,3 +34,4 @@ Material:
     m_Floats: []
     m_Colors: []
   m_BuildTextureStacks: []
+  m_AllowLocking: 1
