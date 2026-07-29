@@ -147,15 +147,24 @@ namespace Game.Environment
             }
         }
 
-        // Caches alll terrain data into custom class
+        // Caches all terrain data into custom class
         public void CacheAllTerrain()
         {
             terrainList.Clear();
             foreach (Transform child in terrainParent.transform)
             {
-                targetTerrain = child.GetComponent<Terrain>();
-                terrainList.Add(new terrainHandler(targetTerrain));
-                
+                if (child.TryGetComponent<Terrain>(out Terrain targetTerrain))
+                {
+                    terrainList.Add(new terrainHandler(targetTerrain));
+                }
+                else
+                {
+                    foreach (Transform borderChild in child.transform)
+                    {
+                        targetTerrain = borderChild.GetComponent<Terrain>();
+                        terrainList.Add(new terrainHandler(targetTerrain));
+                    }
+                }
             }
         }
 
