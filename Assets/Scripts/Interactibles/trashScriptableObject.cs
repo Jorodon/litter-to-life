@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game.Objective
@@ -10,10 +11,20 @@ namespace Game.Objective
         public string objectiveID;
         public string objectiveName;
 
-        // Sends the objective ID to progression manager upon objective being completed
+        [Header("Milestones")]
+        [SerializeField]
+        private float[] milestonePercentages = { 25f, 50f, 75f };
+
+        public IList<float> MilestonePercentages => milestonePercentages;
+
+        public float GetCurrentProgress()
+        {
+            return trashCollectionManager.Instance.GetObjectiveProgress(this);
+        }
+
         public bool CompleteObjective()
         {
-            return trashCollectionManager.Instance.CompleteMilestone(objectiveID);
+            return trashCollectionManager.Instance.CompleteObjective(objectiveID);
         }
     }
 }

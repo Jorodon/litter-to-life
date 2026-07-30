@@ -17,7 +17,7 @@ namespace Game.Objective
         // Sends the objective ID to progression manager upon objective being completed
         public bool CompleteObjective()
         {
-            return trashCollectionManager.Instance.CompleteMilestone(objectiveID);
+            return trashCollectionManager.Instance.CompleteObjective(objectiveID);
         }
     }
 }

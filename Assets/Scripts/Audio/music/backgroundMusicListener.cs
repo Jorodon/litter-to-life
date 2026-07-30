@@ -1,21 +1,22 @@
-using UnityEngine;
+using System.Security.Cryptography;
 using FMODUnity;
 using Game.Objective;
-using System.Security.Cryptography;
+using UnityEngine;
 
 namespace Game.Audio.Music
 {
     public class backgroundMusicListener : MonoBehaviour
     {
-
         // Creates singleton access for background music across all scripts (might not need anymore)
         public static backgroundMusicListener Instance { get; private set; }
 
         // Serialized field to get initial music event
         [Header("Background Music Event")]
-        [SerializeField] private EventReference musicEventReference;
+        [SerializeField]
+        private EventReference musicEventReference;
 
-        [SerializeField] private trashScriptableObject mainObjective;
+        [SerializeField]
+        private trashScriptableObject mainObjective;
 
         private backgroundMusicManager backgroundMusicWrapper;
 
@@ -43,13 +44,13 @@ namespace Game.Audio.Music
         // Listens for a milestone to be reached
         private void OnEnable()
         {
-            trashCollectionManager.OnMilestoneCompletion += HandleMilestoneCompletion;
+            trashCollectionManager.OnObjectiveCompleted += HandleMilestoneCompletion;
         }
 
         // Removes milestone function to preserve memory
         private void OnDisable()
         {
-            trashCollectionManager.OnMilestoneCompletion -= HandleMilestoneCompletion;
+            trashCollectionManager.OnObjectiveCompleted -= HandleMilestoneCompletion;
         }
 
         // Checks that applicable objective was completed, then increases music state
@@ -59,8 +60,7 @@ namespace Game.Audio.Music
             {
                 IncreaseMusicState();
             }
-            }
-
+        }
 
         // Increase the music state value by 1
         public void IncreaseMusicState()
@@ -68,14 +68,20 @@ namespace Game.Audio.Music
             backgroundMusicWrapper.musicState++;
             Debug.Log("New music state:");
             Debug.Log(backgroundMusicWrapper.musicState);
-            backgroundMusicWrapper.SetGlobalMusicParameter("Music State", backgroundMusicWrapper.musicState);
+            backgroundMusicWrapper.SetGlobalMusicParameter(
+                "Music State",
+                backgroundMusicWrapper.musicState
+            );
         }
 
         // Set the distance value
         public void ChangeDistance(float value)
         {
             backgroundMusicWrapper.distance = value;
-            backgroundMusicWrapper.SetGlobalMusicParameter("Distance", backgroundMusicWrapper.distance);
+            backgroundMusicWrapper.SetGlobalMusicParameter(
+                "Distance",
+                backgroundMusicWrapper.distance
+            );
         }
 
         // Plays the selected music event
@@ -102,5 +108,4 @@ namespace Game.Audio.Music
             backgroundMusicWrapper.Release();
         }
     }
-
 }
