@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using UnityEngine;
-using Game.Objective;
 using System.Runtime.CompilerServices;
+using Game.Objective;
+using UnityEngine;
 
 namespace Game.Environment
 {
@@ -19,10 +19,11 @@ namespace Game.Environment
         private List<terrainHandler> terrainList = new List<terrainHandler>();
 
         public int treesToGenerate = 50;
-        
+
         // Exclusion settings for trees (do not paint trees on these materials)
         [Header("Exclusion Settings")]
         public int excludedLayerIndex = 1;
+
         [Range(0f, 1f)]
         public float exclusionThreshold = 0.1f;
 
@@ -30,7 +31,7 @@ namespace Game.Environment
         private void Awake()
         {
             terrainParent = gameObject;
-            if (targetTerrain == null) 
+            if (targetTerrain == null)
             {
                 targetTerrain = Terrain.activeTerrain;
             }
@@ -49,19 +50,20 @@ namespace Game.Environment
         // Listens for a milestone to be reached
         private void OnEnable()
         {
-            trashCollectionManager.OnMilestoneCompletion += HandleMilestoneCompletion;
+            trashCollectionManager.OnObjectiveCompleted += HandleMilestoneCompletion;
         }
 
         // Removes milestone function to preserve memory
         private void OnDisable()
         {
-            trashCollectionManager.OnMilestoneCompletion -= HandleMilestoneCompletion;
+            trashCollectionManager.OnObjectiveCompleted -= HandleMilestoneCompletion;
         }
 
-        // Checks that applicable objective was completed, then adds corresponding 
+        // Checks that applicable objective was completed, then adds corresponding
         private void HandleMilestoneCompletion(string objectiveID)
         {
-            if (terrainSOList == null) return;
+            if (terrainSOList == null)
+                return;
 
             for (int i = 0; i < terrainSOList.Count; i++)
             {

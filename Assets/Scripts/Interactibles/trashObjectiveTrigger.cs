@@ -24,7 +24,7 @@ namespace Game.Objective
 
         private void OnEnable()
         {
-            collectionManager?.RegisterTrash(this);
+            collectionManager?.RegisterTrash(this, objective);
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -44,13 +44,12 @@ namespace Game.Objective
                 return;
             }
 
-            if (collectionManager.TryCollectTrash(this, other))
+            if (collectionManager.TryCollectTrash(this, other, objective))
             {
                 trashCollected = true;
 
                 if (collectionManager.IsCollectionComplete)
                 {
-                    objective?.CompleteObjective();
                     testTerrainObj?.CompleteObjective();
                     testTerrainTrees?.CompleteObjective();
                 }
