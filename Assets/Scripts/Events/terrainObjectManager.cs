@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using Game.Objective;
 using UnityEngine;
 
@@ -98,6 +97,18 @@ namespace Game.Environment
             {
                 instance.GenerateTrees(treesToGenerate, excludedLayerIndex, exclusionThreshold);
             }
+        }
+
+        public List<Vector3> GetRandomTreeLocation(int numberOfBirds)
+        {
+            List<Vector3> birdSpawns = new List<Vector3>();
+
+            for (int i = 0; i < numberOfBirds; i++)
+            {
+                terrainHandler instance = terrainList[Random.Range(0, 9)];
+                birdSpawns.Add(instance.GetSingleRandomTreeLocation(excludedLayerIndex, exclusionThreshold));
+            }
+            return birdSpawns;
         }
 
         // Clears terrain of details when given list of game objects
