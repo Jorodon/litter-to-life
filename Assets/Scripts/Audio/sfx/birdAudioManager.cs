@@ -1,48 +1,87 @@
 using UnityEngine;
-using FMODUnity;
+using Game.Objective;
+using System.Collections.Generic;
+using Game.Environment;
 
 namespace Game.Audio.Environment
 {
     public class birdAudioManager : MonoBehaviour
     {
-        // Serialized field to get bird event
-        [Header("Bird SFX Event")]
-        [SerializeField] private EventReference birdEventReference;
+        // // Serialized field to get bird event
+        // [Header("Bird SFX Event")]
+        // [SerializeField] private EventReference birdEventReference;
+
+        // private PersistentAudioInstance birdAudioWrapper;
+
+        // List of terrain scriptable objects
+        [SerializeField]
+        private terrainDetailSO birdSO;
+
+        [SerializeField]
+        private terrainObjectManager terrainManager;
+
+        [SerializeField]
+        private int numberOfBirds = 5;
 
 
-        private Vector3 currentPos;
-        private Vector3 nextPos;
-        private PersistentAudioInstance birdAudioWrapper;
+        // //Starts wind event
+        // private void Awake()
+        // {
+        //     birdAudioWrapper = new PersistentAudioInstance(birdEventReference, transform);
+        // }
 
-        //Starts wind event
-        private void Awake()
+        // Listens for a milestone to be reached
+        private void OnEnable()
         {
-            birdAudioWrapper = new PersistentAudioInstance(birdEventReference, transform);
+            trashCollectionManager.OnObjectiveCompleted += HandleMilestoneCompletion;
         }
 
-        // Calculates starting position, next position to move and plays wind sound
-        private void Start()
+        // Removes milestone function to preserve memory
+        private void OnDisable()
         {
-            //currentPos = transform.position;
-            //CalculateNewPosition();
-
-            //birdAudioWrapper.UpdatePosition();
-            birdAudioWrapper.PlayAudio();
+            trashCollectionManager.OnObjectiveCompleted -= HandleMilestoneCompletion;
         }
 
-        // Moves wind toward goal position, calculates next position if within range of goal
-        private void Update()
+        // Checks that applicable objective was completed, then adds corresponding
+        private void HandleMilestoneCompletion(string objectiveID)
         {
-            // currentPos = Vector3.MoveTowards(currentPos, nextPos, directionChangeSpeed * Time.deltaTime);
+            if (birdSO != null && objectiveID == birdSO.objectiveID)
+            {
+                List<Vector3> birdSpawnLocations = terrainManager.GetRandomTreeLocation(numberOfBirds);
+                
+                 foreach (Vector3 instance in birdSpawnLocations)
+                {
+                    Debug.Log("Spawning bird at position: " + instance);
+                    Instantiate(birdSO.relaventObjects[0], instance, Quaternion.identity);
+                }
+            }
+        }
 
-            //birdAudioWrapper.UpdatePosition(currentPos);
 
-            // if (Vector3.Distance(currentPos, nextPos) < 1f)
-            // {
-            //     CalculateNewPosition();
-            // }
+
+        // // Calculates starting position, next position to move and plays wind sound
+        // private void Start()
+        // {
+        //     //currentPos = transform.position;
+        //     //CalculateNewPosition();
+
+        //     //birdAudioWrapper.UpdatePosition();
+        //     birdAudioWrapper.PlayAudio();
+        // }
+
+        // // Moves wind toward goal position, calculates next position if within range of goal
+        // private void Update()
+        // {
+        //     // currentPos = Vector3.MoveTowards(currentPos, nextPos, directionChangeSpeed * Time.deltaTime);
+
+        //     //birdAudioWrapper.UpdatePosition(currentPos);
+
+        //     // if (Vector3.Distance(currentPos, nextPos) < 1f)
+        //     // {
+        //     //     CalculateNewPosition();
+        //     // }
         
-        }
+        // }
 
         // // Calculates a random position within donut around object and sets a random wind speed
         // public void CalculateNewPosition()

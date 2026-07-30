@@ -10,11 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d910d1c803aaceb418c02e2f8cd5cab7, type: 3}
-  m_Name: flowerSO
+  m_Name: birdSO
   m_EditorClassIdentifier: Assembly-CSharp::Game.Objective.terrainDetailSO
-  objectiveID: OBJ_SPAWN_FLOWER
-  objectName: flowers
+  objectiveID: OBJ_SPAWN_BIRDS
+  objectName: birds
   relaventObjects:
-  - {fileID: 3811120315536780707, guid: 7917e70f5baa68944aad80732cb08b3d, type: 3}
-  - {fileID: 2509144546569432699, guid: aa8ea3d66a87ed449832e8709ec90517, type: 3}
-  - {fileID: 3036827482424969206, guid: 53083e9d6ba91ba4cad309a95b8c8f20, type: 3}
+  - {fileID: 4391776705178874445, guid: 59d4bf9ca02d4ba46b12460750298f5b, type: 3}

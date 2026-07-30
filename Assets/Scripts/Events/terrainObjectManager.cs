@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using Game.Objective;
 using UnityEngine;
 
@@ -15,6 +14,11 @@ namespace Game.Environment
         // List of terrain scriptable objects
         [SerializeField]
         private List<terrainDetailSO> terrainSOList;
+
+        [SerializeField]
+        public trashScriptableObject trashSO;
+
+        public Collider colliderTest;
 
         private List<terrainHandler> terrainList = new List<terrainHandler>();
 
@@ -65,6 +69,11 @@ namespace Game.Environment
             if (terrainSOList == null)
                 return;
 
+            if (objectiveID == trashSO.objectiveID)
+            {
+                SelectivelyRestoreAllCacheInArea(colliderTest, terrainSOList[0].relaventObjects);
+            }
+
             for (int i = 0; i < terrainSOList.Count; i++)
             {
                 if (objectiveID == terrainSOList[i].objectiveID)
@@ -91,6 +100,14 @@ namespace Game.Environment
             }
         }
 
+        public void SelectivelyRestoreAllCacheInArea(Collider other, List<GameObject> detailObjects)
+        {
+            foreach (terrainHandler instance in terrainList)
+            {
+                instance.SelectivelyRestoreCacheInArea(other, detailObjects);
+            }
+        }
+
         // Randomly generates trees on terrain while avoiding excluded layers
         public void GenerateAllTrees()
         {
@@ -98,6 +115,18 @@ namespace Game.Environment
             {
                 instance.GenerateTrees(treesToGenerate, excludedLayerIndex, exclusionThreshold);
             }
+        }
+
+        public List<Vector3> GetRandomTreeLocation(int numberOfBirds)
+        {
+            List<Vector3> birdSpawns = new List<Vector3>();
+
+            for (int i = 0; i < numberOfBirds; i++)
+            {
+                terrainHandler instance = terrainList[Random.Range(0, 9)];
+                birdSpawns.Add(instance.GetSingleRandomTreeLocation(excludedLayerIndex, exclusionThreshold));
+            }
+            return birdSpawns;
         }
 
         // Clears terrain of details when given list of game objects

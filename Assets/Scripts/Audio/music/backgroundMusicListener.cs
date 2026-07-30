@@ -18,6 +18,9 @@ namespace Game.Audio.Music
         [SerializeField]
         private trashScriptableObject mainObjective;
 
+        [SerializeField]
+        private GameObject canvas;
+
         private backgroundMusicManager backgroundMusicWrapper;
 
         // Runs before Start() to prevent duplicates, set a single Instance, and ensure it survives across scenes
@@ -44,23 +47,44 @@ namespace Game.Audio.Music
         // Listens for a milestone to be reached
         private void OnEnable()
         {
-            trashCollectionManager.OnObjectiveCompleted += HandleMilestoneCompletion;
+            trashCollectionManager.OnObjectiveCompleted += HandleObjectiveCompletion;
+            trashCollectionManager.OnObjectiveMilestoneReached += HandleMilestoneCompletion;
+            trashCollectionManager.OnAllObjectivesCompleted += HandleAllCompleted;
         }
 
         // Removes milestone function to preserve memory
         private void OnDisable()
         {
-            trashCollectionManager.OnObjectiveCompleted -= HandleMilestoneCompletion;
+            trashCollectionManager.OnObjectiveCompleted -= HandleObjectiveCompletion;
+            trashCollectionManager.OnObjectiveMilestoneReached -= HandleMilestoneCompletion;
+            trashCollectionManager.OnAllObjectivesCompleted -= HandleAllCompleted;
         }
 
         // Checks that applicable objective was completed, then increases music state
-        private void HandleMilestoneCompletion(string objectiveID)
+        private void HandleObjectiveCompletion(string objectiveID)
+        {
+            if (mainObjective != null && objectiveID == mainObjective.objectiveID)
+            {
+                IncreaseMusicState();
+                Instantiate(canvas);
+            }
+        }
+
+         // Checks that applicable objective was completed, then increases music state
+        private void HandleMilestoneCompletion(string objectiveID, float milestone)
         {
             if (mainObjective != null && objectiveID == mainObjective.objectiveID)
             {
                 IncreaseMusicState();
             }
         }
+
+         // Checks that applicable objective was completed, then increases music state
+        private void HandleAllCompleted()
+        {
+            Debug.Log("All objectives completed.");
+        }
+
 
         // Increase the music state value by 1
         public void IncreaseMusicState()
