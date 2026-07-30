@@ -15,6 +15,11 @@ namespace Game.Environment
         [SerializeField]
         private List<terrainDetailSO> terrainSOList;
 
+        [SerializeField]
+        public trashScriptableObject trashSO;
+
+        public Collider colliderTest;
+
         private List<terrainHandler> terrainList = new List<terrainHandler>();
 
         public int treesToGenerate = 50;
@@ -64,6 +69,11 @@ namespace Game.Environment
             if (terrainSOList == null)
                 return;
 
+            if (objectiveID == trashSO.objectiveID)
+            {
+                SelectivelyRestoreAllCacheInArea(colliderTest, terrainSOList[0].relaventObjects);
+            }
+
             for (int i = 0; i < terrainSOList.Count; i++)
             {
                 if (objectiveID == terrainSOList[i].objectiveID)
@@ -87,6 +97,14 @@ namespace Game.Environment
                             break;
                     }
                 }
+            }
+        }
+
+        public void SelectivelyRestoreAllCacheInArea(Collider other, List<GameObject> detailObjects)
+        {
+            foreach (terrainHandler instance in terrainList)
+            {
+                instance.SelectivelyRestoreCacheInArea(other, detailObjects);
             }
         }
 

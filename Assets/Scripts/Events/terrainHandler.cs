@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using NUnit.Framework.Internal;
 
 namespace Game.Environment
 {
@@ -58,6 +59,98 @@ namespace Game.Environment
             for (int i = 0; i < terrainCache.cachedDetails.Length; i++)
             {
                 terrainData.SetDetailLayer(0, 0, i, terrainCache.cachedDetails[i]);
+            }
+        }
+
+        // Test that collider overlaps with terrain and returns grid bounds for terrain detail layer
+        public bool GetDetailGridBounds(Collider other, out int startX, out int startZ, out int width, out int height)
+        {
+            startX = startZ = width = height = 0;
+
+            Bounds colliderBounds = other.bounds;
+
+            // Finds local terrain min/max of collider
+            Vector3 localMin = colliderBounds.min - terrain.transform.position;
+            Vector3 localMax = colliderBounds.max - terrain.transform.position;
+
+            int detailRes = terrainData.detailResolution;
+
+            // Find the norm min/max for X/Z axis
+            float normMinX = localMin.x / terrainData.size.x;
+            float normMinZ = localMin.z / terrainData.size.z;
+            float normMaxX = localMax.x / terrainData.size.x;
+            float normMaxZ = localMax.z / terrainData.size.z;
+
+            // Map norm coords to grid and clamp to terrain detail res
+            int minX = Mathf.Clamp(Mathf.FloorToInt(normMinX * detailRes), 0, detailRes - 1);
+            int minZ = Mathf.Clamp(Mathf.FloorToInt(normMinZ * detailRes), 0, detailRes - 1);
+            int maxX = Mathf.Clamp(Mathf.CeilToInt(normMaxX * detailRes), 0, detailRes);
+            int maxZ = Mathf.Clamp(Mathf.CeilToInt(normMaxZ * detailRes), 0, detailRes);
+
+            // Assign start values and find weidth/height
+            startX = minX;
+            startZ = minZ;
+            width = maxX - minX;
+            height = maxZ - minZ;
+
+            // Returns true if bounds overlap
+            return width > 0 && height > 0;
+
+        }
+
+        // Restore cached details in area based on mesh collider
+        public void SelectivelyRestoreCacheInArea(Collider other, List<GameObject> targetObjects)
+        {
+            // Check if terrain and mesh collider overlap
+            if (!GetDetailGridBounds(other, out int startX, out int startZ, out int width, out int height))
+            {
+                return;
+            }
+
+            // Slice 2D detail layer and restore smaller sections for higher resolution
+            foreach (GameObject targetObject in targetObjects)
+            {
+                if (targetObject == null) continue;
+
+                int protoIndex = FindPrototypeIndex(targetObject);
+                if (protoIndex == -1) continue;
+
+                // Create a new slice of detail and record current detail layer status
+                int[,] detailSlice = new int[height, width];
+                int[,] fullCache = terrainCache.cachedDetails[protoIndex];
+                int[,] currentDetails = terrainData.GetDetailLayer(startX, startZ, width, height, protoIndex);
+
+                // Test each point to see if it falls inside bounds
+                for (int z = 0; z < height; z++)
+                {
+                    for (int x = 0; x < width; x++)
+                    {
+                        // Normalize terrain coords
+                        float normX = (float)(startX + x) / terrainData.detailResolution;
+                        float normZ = (float)(startZ + z) / terrainData.detailResolution;
+
+                        // Find local coords of terrain
+                        float localX = normX * terrainData.size.x;
+                        float localZ = normZ * terrainData.size.z;
+                        float localY = terrainData.GetInterpolatedHeight(normX, normZ); // Samples heightmap
+
+                        // Find position vector of point in world coords
+                        Vector3 pointWorldPos = terrain.transform.position + new Vector3(localX, localY, localZ);
+
+                        // If point aligns with collider bounds, apply cached details
+                        if (other.ClosestPoint(pointWorldPos) == pointWorldPos)
+                        {
+                            detailSlice[z, x] = fullCache[startZ + z, startX + x];
+                        }
+                        else
+                        {
+                            detailSlice[z, x] = currentDetails[z, x];
+                        }
+                    }
+                }
+
+                // Apply slice back to target area
+                terrainData.SetDetailLayer(startX, startZ, protoIndex, detailSlice);
             }
         }
 
