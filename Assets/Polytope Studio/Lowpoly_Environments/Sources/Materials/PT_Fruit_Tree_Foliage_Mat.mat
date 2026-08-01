@@ -14,8 +14,7 @@ Material:
   m_ValidKeywords:
   - _CUSTOMWIND_ON
   - _TRANSLUCENCYONOFF_ON
-  m_InvalidKeywords:
-  - _ALPHAPREMULTIPLY_ON
+  m_InvalidKeywords: []
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
@@ -133,7 +132,7 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _GroundColor: {r: 1, g: 0, b: 0, a: 1}
-    - _TopColor: {r: 0.5754717, g: 0.5186884, b: 0.04071733, a: 1}
+    - _GroundColor: {r: 0.9528302, g: 0.5348434, b: 0.58476037, a: 1}
+    - _TopColor: {r: 1, g: 0.5518868, b: 0.7403651, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
