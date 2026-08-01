@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
-using NUnit.Framework.Internal;
+using Game.Objective;
 
 namespace Game.Environment
 {
@@ -213,6 +213,95 @@ namespace Game.Environment
 
             // Apply new list of trees to terrain 
             terrainData.SetTreeInstances(currentInstances.ToArray(), true);
+        }
+
+        public void ReplaceTrees(List<terrainDetailSO> treeSOList) 
+        {
+            Dictionary<int, int> prototypeIndexes = new Dictionary<int, int>();
+            List<GameObject> protoPrefabs = new List<GameObject>();
+
+            foreach (TreePrototype treeProto in terrainData.treePrototypes)
+            {
+                protoPrefabs.Add(treeProto.prefab);
+            }
+
+            foreach(terrainDetailSO treeList in treeSOList)
+            {
+                if (treeList.relaventObjects == null)
+                {
+                    Debug.Log($"No prefabs added to detail scriptable object {treeList.objectName}");
+                    return;
+                }
+
+                int key = protoPrefabs.IndexOf(treeList.relaventObjects[0]);
+                int value = protoPrefabs.IndexOf(treeList.relaventObjects[1]);
+
+                if (key == -1 || value == -1) 
+                {
+                    Debug.Log($"Prototype not added to terrain {terrain.name}. Check that both {treeList.relaventObjects[0].name} and {treeList.relaventObjects[1].name} have been added to the terrain.");
+                    continue;
+                }
+
+                prototypeIndexes.Add(key, value);
+            }
+
+            List<TreeInstance> currentInstances = new List<TreeInstance>(terrainData.treeInstances);
+
+            for (int i = 0; i < currentInstances.Count; i++)
+            {
+                TreeInstance tree = currentInstances[i];
+                if (prototypeIndexes.TryGetValue(tree.prototypeIndex, out int newIndex))
+                {
+                    tree.prototypeIndex = newIndex;
+                    currentInstances[i] = tree;
+                }
+            }
+
+            terrainData.treeInstances = currentInstances.ToArray();
+            terrain.Flush();
+        }
+
+        public void RestoreTrees(List<terrainDetailSO> treeSOList) 
+        {
+            // Dictionary<int, int> prototypeIndexes = new Dictionary<int, int>();
+            List<GameObject> prototypePrefabs = new List<GameObject>();
+
+            foreach (TreePrototype treeProto in terrainData.treePrototypes)
+            {
+                prototypePrefabs.Add(treeProto.prefab);
+            }
+
+            List<GameObject> treePrefabs = new List<GameObject>();
+            List<int> prototypeIndexes = new List<int>();
+
+            foreach(terrainDetailSO treeList in treeSOList)
+            {
+                if (treePrefabs.Contains(treeList.relaventObjects[1])) continue;
+
+                treePrefabs.Add(treeList.relaventObjects[1]);
+                prototypeIndexes.Add(prototypePrefabs.IndexOf(treeList.relaventObjects[1]));
+                //int value = protoPrefabs.IndexOf(treeList.relaventObjects[0]);
+
+                //if (key == -1 || value == -1) continue;
+
+                //prototypeIndexes.Add(key, value);
+            }
+
+            List<TreeInstance> currentInstances = new List<TreeInstance>(terrainData.treeInstances);
+
+            for (int i = 0; i < currentInstances.Count; i++)
+            {
+                TreeInstance tree = currentInstances[i];
+                int checkIndex = prototypeIndexes.IndexOf(tree.prototypeIndex);
+                if (checkIndex != -1)
+                {
+                    tree = terrainCache.cachedTrees[i];
+                    currentInstances[i] = tree;
+                }
+            }
+
+            terrainData.treeInstances = currentInstances.ToArray();
+            terrain.Flush();
         }
 
         public Vector3 GetSingleRandomTreeLocation(int excludedLayerIndex, float exclusionThreshold)

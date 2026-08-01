@@ -13,7 +13,11 @@ namespace Game.Environment
 
         // List of terrain scriptable objects
         [SerializeField]
-        private List<terrainDetailSO> terrainSOList;
+        private List<terrainDetailSO> detailSOList;
+
+        // List of terrain scriptable objects
+        [SerializeField]
+        private List<terrainDetailSO> treeSOList;
 
         [SerializeField]
         public trashScriptableObject trashSO;
@@ -49,55 +53,70 @@ namespace Game.Environment
             //GenerateAllTrees();
             //GenerateAllFlowers();
             ClearTerrainDetailsOnStartup();
+            ReplaceAllTrees();
         }
 
         // Listens for a milestone to be reached
         private void OnEnable()
         {
             trashCollectionManager.OnObjectiveCompleted += HandleMilestoneCompletion;
+            trashCollectionManager.OnAllObjectivesCompleted += HandleAllObjectiveCompletion;
         }
 
         // Removes milestone function to preserve memory
         private void OnDisable()
         {
             trashCollectionManager.OnObjectiveCompleted -= HandleMilestoneCompletion;
+            trashCollectionManager.OnAllObjectivesCompleted -= HandleAllObjectiveCompletion;
         }
 
         // Checks that applicable objective was completed, then adds corresponding
         private void HandleMilestoneCompletion(string objectiveID)
         {
-            if (terrainSOList == null)
+            if (detailSOList == null)
                 return;
 
             if (objectiveID == trashSO.objectiveID)
             {
-                SelectivelyRestoreAllCacheInArea(colliderTest, terrainSOList[0].relaventObjects);
+                SelectivelyRestoreAllCacheInArea(colliderTest, detailSOList[1].relaventObjects);
             }
 
-            for (int i = 0; i < terrainSOList.Count; i++)
-            {
-                if (objectiveID == terrainSOList[i].objectiveID)
-                {
-                    switch (terrainSOList[i].objectName)
-                    {
-                        case "flowers":
-                            SelectivelyRestoreAllCache(terrainSOList[i].relaventObjects);
-                            break;
-                        case "trees":
-                            GenerateAllTrees();
-                            break;
-                        case "mushrooms":
-                            //TO-DO : Generate mushrooms
-                            break;
-                        case "grass":
-                            //TO-DO : Generate low grass
-                            break;
-                        case "high-grass":
-                            //TO-DO : Generate high grass
-                            break;
-                    }
-                }
-            }
+            // for (int i = 0; i < detailSOList.Count; i++)
+            // {
+            //     if (objectiveID == detailSOList[i].objectiveID)
+            //     {
+            //         switch (detailSOList[i].objectName)
+            //         {
+            //             case "flowers":
+            //                 SelectivelyRestoreAllCache(detailSOList[i].relaventObjects);
+            //                 break;
+            //             case "trees":
+            //                 //GenerateAllTrees();
+            //                 RestoreAllTrees();
+            //                 break;
+            //             case "mushrooms":
+            //                 //TO-DO : Generate mushrooms
+            //                 break;
+            //             case "grass":
+            //                 //TO-DO : Generate low grass
+            //                 break;
+            //         }
+            //     }
+            // }
+
+            // if (objectiveID == treeSOList[0].objectiveID)
+            // {
+            //     RestoreAllTrees();
+            // }
+        }
+
+        private void HandleAllObjectiveCompletion()
+        {
+            if (detailSOList == null)
+                return;
+
+            //Big restoration at end of cleaning up trash?
+
         }
 
         public void SelectivelyRestoreAllCacheInArea(Collider other, List<GameObject> detailObjects)
@@ -114,6 +133,23 @@ namespace Game.Environment
             foreach (terrainHandler instance in terrainList)
             {
                 instance.GenerateTrees(treesToGenerate, excludedLayerIndex, exclusionThreshold);
+            }
+        }
+
+        // Replaces dead trees with live ones
+        public void ReplaceAllTrees()
+        {
+            foreach (terrainHandler instance in terrainList)
+            {
+                instance.ReplaceTrees(treeSOList);
+            }
+        }
+
+        public void RestoreAllTrees()
+        {
+            foreach (terrainHandler instance in terrainList)
+            {
+                instance.RestoreTrees(treeSOList);
             }
         }
 
@@ -143,7 +179,7 @@ namespace Game.Environment
         {
             List<GameObject> objectiveObjects = new List<GameObject>();
 
-            foreach (terrainDetailSO terrainDetail in terrainSOList)
+            foreach (terrainDetailSO terrainDetail in detailSOList)
             {
                 foreach (GameObject prefab in terrainDetail.relaventObjects)
                 {
@@ -168,13 +204,17 @@ namespace Game.Environment
             {
                 //TO-DO : Restore grass from cache
             }
+
         }
 
         public void GenerateAllFlowers()
         {
-            foreach (terrainHandler instance in terrainList)
+            for (int i = 0; i < detailSOList.Count; i++)
             {
-                //TO-DO : Restore flowers from cache
+                if (detailSOList[i].objectName == "flowers")
+                {
+                    SelectivelyRestoreAllCache(detailSOList[i].relaventObjects);
+                }
             }
         }
 
