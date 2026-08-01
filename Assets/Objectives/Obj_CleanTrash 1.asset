@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Obj_CleanTrash 1
   m_EditorClassIdentifier: Assembly-CSharp::Game.Objective.trashScriptableObject
   objectiveID: OBJ_CLEAN_TRASH2
-  objectiveName: Clean Trash2
+  objectiveName: Clean Trash TWO
   milestonePercentages:
   - 20
   - 40

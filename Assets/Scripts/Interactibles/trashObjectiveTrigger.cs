@@ -9,7 +9,7 @@ namespace Game.Objective
         private string trashCanTag = "TrashCan";
 
         [SerializeField]
-        private trashScriptableObject objective;
+        private trashScriptableObject[] objectives;
 
         [SerializeField]
         private terrainDetailSO testTerrainObj;
@@ -24,7 +24,7 @@ namespace Game.Objective
 
         private void OnEnable()
         {
-            collectionManager?.RegisterTrash(this, objective);
+            collectionManager?.RegisterTrash(this, objectives);
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -44,14 +44,14 @@ namespace Game.Objective
                 return;
             }
 
-            if (collectionManager.TryCollectTrash(this, other, objective))
+            if (collectionManager.TryCollectTrash(this, other, objectives))
             {
                 trashCollected = true;
 
                 if (collectionManager.IsCollectionComplete)
                 {
-                    //testTerrainObj?.CompleteObjective();
-                    //testTerrainTrees?.CompleteObjective();
+                    testTerrainObj?.CompleteObjective();
+                    testTerrainTrees?.CompleteObjective();
                 }
 
                 Destroy(gameObject);

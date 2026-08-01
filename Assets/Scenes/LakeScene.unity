@@ -424,7 +424,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Objective.trashObjectiveTrigger
   trashCanTag: TrashCan
-  objective: {fileID: 11400000, guid: 6ebb1ff31750c6278a0b99ae6931e686, type: 2}
+  objectives:
+  - {fileID: 11400000, guid: 2688f7a47739cf64ebb93904dd553b13, type: 2}
   testTerrainObj: {fileID: 11400000, guid: 85069db7cf137544b8dc0ec89f45bdca, type: 2}
   testTerrainTrees: {fileID: 11400000, guid: eea1d73e0bbaf8546bb3d46839ba9152, type: 2}
   collectionManager: {fileID: 895386437}
@@ -777,7 +778,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Objective.trashObjectiveTrigger
   trashCanTag: TrashCan
-  objective: {fileID: 11400000, guid: 2688f7a47739cf64ebb93904dd553b13, type: 2}
+  objectives:
+  - {fileID: 11400000, guid: 2688f7a47739cf64ebb93904dd553b13, type: 2}
   testTerrainObj: {fileID: 11400000, guid: 85069db7cf137544b8dc0ec89f45bdca, type: 2}
   testTerrainTrees: {fileID: 11400000, guid: eea1d73e0bbaf8546bb3d46839ba9152, type: 2}
   collectionManager: {fileID: 895386437}
@@ -1672,7 +1674,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8426417407852414534, guid: c28ce1c83ed4b97bea65a2b4ea49148b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8426417407852414534, guid: c28ce1c83ed4b97bea65a2b4ea49148b, type: 3}
       propertyPath: m_TagString
@@ -2960,7 +2962,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Objective.trashObjectiveTrigger
   trashCanTag: TrashCan
-  objective: {fileID: 11400000, guid: 6ebb1ff31750c6278a0b99ae6931e686, type: 2}
+  objectives:
+  - {fileID: 11400000, guid: 2688f7a47739cf64ebb93904dd553b13, type: 2}
+  - {fileID: 11400000, guid: 6ebb1ff31750c6278a0b99ae6931e686, type: 2}
   testTerrainObj: {fileID: 11400000, guid: 85069db7cf137544b8dc0ec89f45bdca, type: 2}
   testTerrainTrees: {fileID: 11400000, guid: eea1d73e0bbaf8546bb3d46839ba9152, type: 2}
   collectionManager: {fileID: 895386437}
@@ -3233,7 +3237,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Objective.trashObjectiveTrigger
   trashCanTag: TrashCan
-  objective: {fileID: 11400000, guid: 6ebb1ff31750c6278a0b99ae6931e686, type: 2}
+  objectives:
+  - {fileID: 11400000, guid: 2688f7a47739cf64ebb93904dd553b13, type: 2}
   testTerrainObj: {fileID: 11400000, guid: 85069db7cf137544b8dc0ec89f45bdca, type: 2}
   testTerrainTrees: {fileID: 11400000, guid: eea1d73e0bbaf8546bb3d46839ba9152, type: 2}
   collectionManager: {fileID: 895386437}
@@ -4419,7 +4424,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Objective.trashObjectiveTrigger
   trashCanTag: TrashCan
-  objective: {fileID: 11400000, guid: 6ebb1ff31750c6278a0b99ae6931e686, type: 2}
+  objectives:
+  - {fileID: 11400000, guid: 2688f7a47739cf64ebb93904dd553b13, type: 2}
+  - {fileID: 11400000, guid: 6ebb1ff31750c6278a0b99ae6931e686, type: 2}
   testTerrainObj: {fileID: 11400000, guid: 85069db7cf137544b8dc0ec89f45bdca, type: 2}
   testTerrainTrees: {fileID: 11400000, guid: eea1d73e0bbaf8546bb3d46839ba9152, type: 2}
   collectionManager: {fileID: 895386437}
@@ -5019,7 +5026,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Objective.trashObjectiveTrigger
   trashCanTag: TrashCan
-  objective: {fileID: 11400000, guid: 6ebb1ff31750c6278a0b99ae6931e686, type: 2}
+  objectives:
+  - {fileID: 11400000, guid: 2688f7a47739cf64ebb93904dd553b13, type: 2}
+  - {fileID: 11400000, guid: 6ebb1ff31750c6278a0b99ae6931e686, type: 2}
   testTerrainObj: {fileID: 11400000, guid: 85069db7cf137544b8dc0ec89f45bdca, type: 2}
   testTerrainTrees: {fileID: 11400000, guid: eea1d73e0bbaf8546bb3d46839ba9152, type: 2}
   collectionManager: {fileID: 895386437}
@@ -6946,7 +6955,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Objective.trashObjectiveTrigger
   trashCanTag: TrashCan
-  objective: {fileID: 11400000, guid: 2688f7a47739cf64ebb93904dd553b13, type: 2}
+  objectives:
+  - {fileID: 11400000, guid: 2688f7a47739cf64ebb93904dd553b13, type: 2}
   testTerrainObj: {fileID: 11400000, guid: 85069db7cf137544b8dc0ec89f45bdca, type: 2}
   testTerrainTrees: {fileID: 11400000, guid: eea1d73e0bbaf8546bb3d46839ba9152, type: 2}
   collectionManager: {fileID: 895386437}

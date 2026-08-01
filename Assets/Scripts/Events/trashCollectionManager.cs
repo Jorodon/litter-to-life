@@ -71,7 +71,7 @@ namespace Game.Objective
             }
         }
 
-        public void RegisterTrash(trashObjectiveTrigger trash, trashScriptableObject objective)
+        public void RegisterTrash(trashObjectiveTrigger trash, trashScriptableObject[] objectives)
         {
             if (trash == null)
             {
@@ -80,8 +80,18 @@ namespace Game.Objective
 
             trackedTrash.Add(trash);
 
-            if (objective != null)
+            if (objectives == null)
             {
+                return;
+            }
+
+            foreach (trashScriptableObject objective in objectives)
+            {
+                if (objective == null)
+                {
+                    continue;
+                }
+
                 if (!objectiveProgress.TryGetValue(objective, out var progress))
                 {
                     progress = new ObjectiveProgress();
@@ -95,7 +105,7 @@ namespace Game.Objective
         public bool TryCollectTrash(
             trashObjectiveTrigger trash,
             Collider trashCanCollider,
-            trashScriptableObject objective
+            trashScriptableObject[] objectives
         )
         {
             if (trash == null || trashCanCollider == null)
@@ -113,10 +123,16 @@ namespace Game.Objective
                     + $"Progress: {CollectedTrashCount} / {TotalTrashCount} ({CollectionPercentage:F2}%)"
             );
 
-            if (objective != null && objectiveProgress.TryGetValue(objective, out var progress))
+            if (objectives != null)
             {
-                progress.CollectedCount++;
-                CheckObjectiveMilestones(objective, progress);
+                foreach (trashScriptableObject objective in objectives)
+                {
+                    if (objective != null && objectiveProgress.TryGetValue(objective, out var progress))
+                    {
+                        progress.CollectedCount++;
+                        CheckObjectiveMilestones(objective, progress);
+                    }
+                }
             }
 
             if (IsCollectionComplete)
