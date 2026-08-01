@@ -171,6 +171,7 @@ Packages/packages-lock.json linguist-generated
 *.asset merge=unityyamlmerge eol=lf
 *TerrainData.asset filter=lfs diff=lfs merge=lfs -text
 *.terrain.asset filter=lfs diff=lfs merge=lfs -text
+*Terrain*.asset filter=lfs diff=lfs merge=lfs -text
 LightingData.asset filter=lfs diff=lfs merge=lfs -text
 NavMesh-*.asset filter=lfs diff=lfs merge=lfs -text
 
