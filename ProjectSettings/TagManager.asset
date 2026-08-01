@@ -17,9 +17,8 @@ TagManager:
   - UI
   - Skybox
   - Ground
-  - 
-  - 
-  - 
+  - BrushHandle
+  - DrawingCanvas
   - 
   - 
   - 
