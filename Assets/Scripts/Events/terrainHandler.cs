@@ -230,7 +230,7 @@ namespace Game.Environment
                 if (treeList.relaventObjects == null)
                 {
                     Debug.Log($"No prefabs added to detail scriptable object {treeList.objectName}");
-                    continue;
+                    return;
                 }
 
                 int key = protoPrefabs.IndexOf(treeList.relaventObjects[0]);

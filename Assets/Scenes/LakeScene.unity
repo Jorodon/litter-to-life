@@ -9203,6 +9203,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 647821041576810085, guid: 0952eb2702a5a48e196550cb92652f13, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8571486671240507191}
+    - targetCorrespondingSourceObject: {fileID: 647821041576810085, guid: 0952eb2702a5a48e196550cb92652f13, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8571486671240507192}
+    - targetCorrespondingSourceObject: {fileID: 647821041576810085, guid: 0952eb2702a5a48e196550cb92652f13, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8571486671240507193}
   m_SourcePrefab: {fileID: 100100000, guid: 0952eb2702a5a48e196550cb92652f13, type: 3}
 --- !u!1 &8571486671240507190 stripped
 GameObject:
@@ -9223,6 +9229,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game.Environment.terrainObjectManager
   detailSOList:
   - {fileID: 11400000, guid: 85069db7cf137544b8dc0ec89f45bdca, type: 2}
+  - {fileID: 11400000, guid: 435adff123ab6e945833793353756a58, type: 2}
   treeSOList:
   - {fileID: 11400000, guid: b9eb6f2ec0e81ed4b8330b48988b87f2, type: 2}
   - {fileID: 11400000, guid: 643ec5bd8ac341440b67d767adbae0aa, type: 2}
@@ -9234,6 +9241,64 @@ MonoBehaviour:
   treesToGenerate: 50
   excludedLayerIndex: 1
   exclusionThreshold: 0.1
+--- !u!114 &8571486671240507192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8571486671240507190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ee50dc40182ecb46b7d8b37c9d41fe0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PredictionReceiver
+  expectedPrediction: flower
+  onPredictionMatched:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8571486671240507191}
+        m_TargetAssemblyTypeName: Game.Environment.terrainObjectManager, Assembly-CSharp
+        m_MethodName: GenerateAllFlowers
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  minConfidence: 0.806
+--- !u!114 &8571486671240507193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8571486671240507190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ee50dc40182ecb46b7d8b37c9d41fe0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PredictionReceiver
+  expectedPrediction: tree
+  onPredictionMatched:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8571486671240507191}
+        m_TargetAssemblyTypeName: Game.Environment.terrainObjectManager, Assembly-CSharp
+        m_MethodName: RestoreAllTrees
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  minConfidence: 0.802
 --- !u!1001 &8903552303591553771
 PrefabInstance:
   m_ObjectHideFlags: 0

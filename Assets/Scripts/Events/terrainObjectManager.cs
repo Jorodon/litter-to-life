@@ -78,31 +78,36 @@ namespace Game.Environment
 
             if (objectiveID == trashSO.objectiveID)
             {
-                SelectivelyRestoreAllCacheInArea(colliderTest, detailSOList[0].relaventObjects);
+                SelectivelyRestoreAllCacheInArea(colliderTest, detailSOList[1].relaventObjects);
             }
 
-            for (int i = 0; i < detailSOList.Count; i++)
-            {
-                if (objectiveID == detailSOList[i].objectiveID)
-                {
-                    switch (detailSOList[i].objectName)
-                    {
-                        case "flowers":
-                            SelectivelyRestoreAllCache(detailSOList[i].relaventObjects);
-                            break;
-                        case "trees":
-                            //GenerateAllTrees();
-                            RestoreAllTrees();
-                            break;
-                        case "mushrooms":
-                            //TO-DO : Generate mushrooms
-                            break;
-                        case "grass":
-                            //TO-DO : Generate low grass
-                            break;
-                    }
-                }
-            }
+            // for (int i = 0; i < detailSOList.Count; i++)
+            // {
+            //     if (objectiveID == detailSOList[i].objectiveID)
+            //     {
+            //         switch (detailSOList[i].objectName)
+            //         {
+            //             case "flowers":
+            //                 SelectivelyRestoreAllCache(detailSOList[i].relaventObjects);
+            //                 break;
+            //             case "trees":
+            //                 //GenerateAllTrees();
+            //                 RestoreAllTrees();
+            //                 break;
+            //             case "mushrooms":
+            //                 //TO-DO : Generate mushrooms
+            //                 break;
+            //             case "grass":
+            //                 //TO-DO : Generate low grass
+            //                 break;
+            //         }
+            //     }
+            // }
+
+            // if (objectiveID == treeSOList[0].objectiveID)
+            // {
+            //     RestoreAllTrees();
+            // }
         }
 
         private void HandleAllObjectiveCompletion()
@@ -199,13 +204,17 @@ namespace Game.Environment
             {
                 //TO-DO : Restore grass from cache
             }
+
         }
 
         public void GenerateAllFlowers()
         {
-            foreach (terrainHandler instance in terrainList)
+            for (int i = 0; i < detailSOList.Count; i++)
             {
-                //TO-DO : Restore flowers from cache
+                if (detailSOList[i].objectName == "flowers")
+                {
+                    SelectivelyRestoreAllCache(detailSOList[i].relaventObjects);
+                }
             }
         }
 
