@@ -4,7 +4,7 @@
 QualitySettings:
   m_ObjectHideFlags: 0
   serializedVersion: 5
-  m_CurrentQuality: 4
+  m_CurrentQuality: 0
   m_QualitySettings:
   - serializedVersion: 5
     name: Low
@@ -33,7 +33,7 @@ QualitySettings:
     realtimeGICPUUsage: 50
     adaptiveVsyncExtraA: 0
     adaptiveVsyncExtraB: 0
-    lodBias: 0.4
+    lodBias: 0.7
     meshLodThreshold: 1
     maximumLODLevel: 0
     enableLODCrossFade: 0
@@ -102,7 +102,7 @@ QualitySettings:
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
     customRenderPipeline: {fileID: 11400000, guid: deb4539d80db8ba168bb5d290f618eca, type: 2}
-    terrainQualityOverrides: 0
+    terrainQualityOverrides: 255
     terrainPixelError: 1
     terrainDetailDensityScale: 1
     terrainBasemapDistance: 1000
@@ -261,11 +261,11 @@ QualitySettings:
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
     customRenderPipeline: {fileID: 11400000, guid: cf6a652e94858004a93399f0a3dac507, type: 2}
-    terrainQualityOverrides: 0
+    terrainQualityOverrides: 24
     terrainPixelError: 1
     terrainDetailDensityScale: 1
     terrainBasemapDistance: 1000
-    terrainDetailDistance: 80
+    terrainDetailDistance: 685
     terrainTreeDistance: 5000
     terrainBillboardStart: 50
     terrainFadeLength: 5
