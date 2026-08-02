@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 99f2df16a704afb45b42546427f17dc1, type: 3}
       propertyPath: m_LocalScale.y
-      value: 138.60004
+      value: 138.60002
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 99f2df16a704afb45b42546427f17dc1, type: 3}
       propertyPath: m_LocalScale.z
@@ -22,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 99f2df16a704afb45b42546427f17dc1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.399
+      value: -192.1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 99f2df16a704afb45b42546427f17dc1, type: 3}
       propertyPath: m_LocalPosition.y
@@ -30,7 +30,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 99f2df16a704afb45b42546427f17dc1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -28.214
+      value: 19.9
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 99f2df16a704afb45b42546427f17dc1, type: 3}
       propertyPath: m_LocalRotation.w
@@ -42,7 +42,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 99f2df16a704afb45b42546427f17dc1, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 99f2df16a704afb45b42546427f17dc1, type: 3}
       propertyPath: m_LocalRotation.z
@@ -83,6 +83,9 @@ PrefabInstance:
       addedObject: {fileID: 6596100757876720416}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 99f2df16a704afb45b42546427f17dc1, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 7201995809075064762}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 99f2df16a704afb45b42546427f17dc1, type: 3}
+      insertIndex: -1
       addedObject: {fileID: -7347822674279130920}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 99f2df16a704afb45b42546427f17dc1, type: 3}
       insertIndex: -1
@@ -106,9 +109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Objective.trashObjectiveTrigger
   trashCanTag: TrashCan
-  objective: {fileID: 11400000, guid: 2688f7a47739cf64ebb93904dd553b13, type: 2}
-  testTerrainObj: {fileID: 11400000, guid: 85069db7cf137544b8dc0ec89f45bdca, type: 2}
-  testTerrainTrees: {fileID: 11400000, guid: eea1d73e0bbaf8546bb3d46839ba9152, type: 2}
+  objective: {fileID: 11400000, guid: 36d3367606fa0f34192c9a40d2514d14, type: 2}
   collectionManager: {fileID: 0}
 --- !u!54 &-8807538153691552935
 Rigidbody:
@@ -136,7 +137,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!136 &6596100757876720416
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -154,12 +155,33 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.0007
   m_Height: 0.005
   m_Direction: 2
   m_Center: {x: 0.00027745432, y: -0.00066603714, z: 0.0023680667}
+--- !u!65 &7201995809075064762
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4110032459988363885}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.0013256882, y: 0.0013256873, z: 0.0047041895}
+  m_Center: {x: 0.00027742455, y: -0.00066603714, z: 0.002368067}
 --- !u!114 &-7347822674279130920
 MonoBehaviour:
   m_ObjectHideFlags: 0

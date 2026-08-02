@@ -11,11 +11,11 @@ namespace Game.Objective
         [SerializeField]
         private trashScriptableObject objective;
 
-        [SerializeField]
-        private terrainDetailSO testTerrainObj;
+        // [SerializeField]
+        // private terrainDetailSO testTerrainObj;
 
-        [SerializeField]
-        private terrainDetailSO testTerrainTrees;
+        // [SerializeField]
+        // private terrainDetailSO testTerrainTrees;
 
         [SerializeField]
         private trashCollectionManager collectionManager;

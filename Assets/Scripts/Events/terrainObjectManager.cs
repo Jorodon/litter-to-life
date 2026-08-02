@@ -22,6 +22,9 @@ namespace Game.Environment
         [SerializeField]
         public trashScriptableObject trashSO;
 
+        [SerializeField]
+        private List<trashScriptableObject> mainObjectives;
+
         public Collider colliderTest;
 
         private List<terrainHandler> terrainList = new List<terrainHandler>();
@@ -78,6 +81,14 @@ namespace Game.Environment
 
             if (objectiveID == trashSO.objectiveID)
             {
+                SelectivelyRestoreAllCacheInArea(colliderTest, detailSOList[1].relaventObjects);
+            }
+
+            int index = mainObjectives.FindIndex(i => i.objectiveID == objectiveID);
+
+            if (mainObjectives != null && index != -1)
+            {
+                // Add list of mesh collider objects corresponding to zones here.
                 SelectivelyRestoreAllCacheInArea(colliderTest, detailSOList[1].relaventObjects);
             }
 
