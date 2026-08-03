@@ -74,21 +74,21 @@ namespace Game.Audio.Music
                 IncreaseMusicState();
                 Instantiate(canvas);
             }
-            int index = mainObjectives.FindIndex(i => i.objectiveID == objectiveID);
+            int index = mainObjectives.FindIndex(i => i.objectiveID == objectiveID && musicState < 4);
 
             if (mainObjectives != null && index != -1)
             {
                 IncreaseMusicState();
+                musicState++;
             }
         }
 
          // Checks that applicable objective was completed, then increases music state
         private void HandleMilestoneCompletion(string objectiveID, float milestone)
         {
-            if (testObjective != null && objectiveID == testObjective.objectiveID && musicState < 4)
+            if (testObjective != null && objectiveID == testObjective.objectiveID)
             {
                 IncreaseMusicState();
-                musicState++;
             }
         }
 

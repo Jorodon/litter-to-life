@@ -28,7 +28,7 @@ namespace Game.Audio.Environment
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.cyan;
-            Gizmos.DrawWireSphere(transform.position, 4);
+            Gizmos.DrawWireSphere(transform.position, 3);
         }
     }
 }

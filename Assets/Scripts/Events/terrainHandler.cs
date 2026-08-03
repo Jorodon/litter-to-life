@@ -306,7 +306,6 @@ namespace Game.Environment
 
         public Vector3 GetSingleRandomTreeLocation(int excludedLayerIndex, float exclusionThreshold)
         {
-            //terrainData.GetTreeInstance(Random.Range(0, terrainData.treeInstances.Length));
 
             // Store alphamap dimensions
             int mapWidth = terrainData.alphamapWidth;
@@ -315,56 +314,25 @@ namespace Game.Environment
             // Store alphamap for terrain
             float[,,] alphamapData = terrainData.GetAlphamaps(0, 0, mapWidth, mapHeight);
             
-            // Initialize an empty list of tree instances for terrain
+            // Pull tree instances from terrain
             List<TreeInstance> currentInstances = new List<TreeInstance>(terrainData.treeInstances);
-            int attempts = 0;
 
-            // Main loop : attempt to add up to (treesToGenerate) trees to terrain, but stop after too many attempts
-            while (attempts < 100)
-            {
-                attempts++;
+            TreeInstance birdTree = currentInstances[Random.Range(0, currentInstances.Count)];
 
-                // Generate random normalized terrain coordinates (0.01 to 0.99)
-                float normX = Random.Range(0.01f, 0.99f);
-                float normZ = Random.Range(0.01f, 0.99f);
+            // Get prefab from tree instance and find height using renderer component bounds on first LOD
+            float heightScale = birdTree.heightScale;
+            GameObject treePrefab = terrainData.treePrototypes[birdTree.prototypeIndex].prefab;
+            LODGroup lodGroup = treePrefab.GetComponent<LODGroup>();
+            LOD[] lodArray = lodGroup.GetLODs();
+            Renderer[] lodRenderers = lodArray[0].renderers;
+            float treeHeight = heightScale * lodRenderers[0].bounds.size.y;
 
-                // Convert normalized coords to alphamap coords
-                int mapX = Mathf.FloorToInt(normX * mapWidth);
-                int mapZ = Mathf.FloorToInt(normZ * mapHeight);
+            // Find the local coordinates for tree top, convert to global coordinates and return them
+            float localX = birdTree.position.x * terrainData.size.x;
+            float localZ = birdTree.position.z * terrainData.size.z;
+            float localY = terrainData.GetInterpolatedHeight(birdTree.position.x, birdTree.position.z);
 
-                // Clamp alphamap coords to prevent out-of-bounds errors
-                mapX = Mathf.Clamp(mapX, 0, mapWidth - 1);
-                mapZ = Mathf.Clamp(mapZ, 0, mapHeight - 1);
-
-                // Layer exclusion logic : Read texture weight for excluded layer at calculated point
-                float textureWeight = alphamapData[mapZ, mapX, excludedLayerIndex];
-
-                // Retry if excluded layer texture weight above threshold
-                if (textureWeight > exclusionThreshold)
-                {
-                    continue;
-                }
-
-                // Create new tree instance and add it to List
-                TreeInstance newTree = new TreeInstance();
-                newTree.position = new Vector3(normX, terrainData.GetInterpolatedHeight(normX, normZ) / terrainData.size.y, normZ);
-                newTree.prototypeIndex = Random.Range(0, terrainData.treePrototypes.Length);
-                newTree.widthScale = Random.Range(0.8f, 1.2f);
-                newTree.heightScale = Random.Range(0.8f, 1.2f);
-                currentInstances.Add(newTree);
-
-                // Apply new list of trees to terrain 
-                terrainData.SetTreeInstances(currentInstances.ToArray(), true);
-
-                float localX = normX * terrainData.size.x;
-                float localZ = normZ * terrainData.size.z;
-                float localY = terrainData.GetInterpolatedHeight(normX, normZ);
-
-                return terrain.transform.position + new Vector3(localX, localY, localZ);
-            }
-
-            Debug.LogWarning("Random tree could not be spawns for birds to occupy");
-            return Vector3.zero;
+            return terrain.transform.position + new Vector3(localX, localY + treeHeight, localZ);
         }
 
         // public void GenerateGrass()

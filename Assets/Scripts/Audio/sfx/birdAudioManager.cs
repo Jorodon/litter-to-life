@@ -31,21 +31,36 @@ namespace Game.Audio.Environment
         // }
 
         // Listens for a milestone to be reached
-        private void OnEnable()
-        {
-            trashCollectionManager.OnObjectiveCompleted += HandleMilestoneCompletion;
-        }
+        // private void OnEnable()
+        // {
+        //     trashCollectionManager.OnObjectiveCompleted += HandleMilestoneCompletion;
+        // }
 
-        // Removes milestone function to preserve memory
-        private void OnDisable()
-        {
-            trashCollectionManager.OnObjectiveCompleted -= HandleMilestoneCompletion;
-        }
+        // // Removes milestone function to preserve memory
+        // private void OnDisable()
+        // {
+        //     trashCollectionManager.OnObjectiveCompleted -= HandleMilestoneCompletion;
+        // }
+
+        // // Checks that applicable objective was completed, then adds corresponding
+        // private void HandleMilestoneCompletion(string objectiveID)
+        // {
+        //     if (birdSO != null && objectiveID == birdSO.objectiveID)
+        //     {
+        //         List<Vector3> birdSpawnLocations = terrainManager.GetRandomTreeLocation(numberOfBirds);
+                
+        //          foreach (Vector3 instance in birdSpawnLocations)
+        //         {
+        //             Debug.Log("Spawning bird at position: " + instance);
+        //             Instantiate(birdSO.relaventObjects[0], instance, Quaternion.identity);
+        //         }
+        //     }
+        // }
 
         // Checks that applicable objective was completed, then adds corresponding
-        private void HandleMilestoneCompletion(string objectiveID)
+        public void SpawnBirds()
         {
-            if (birdSO != null && objectiveID == birdSO.objectiveID)
+            if (birdSO != null)
             {
                 List<Vector3> birdSpawnLocations = terrainManager.GetRandomTreeLocation(numberOfBirds);
                 
@@ -56,7 +71,6 @@ namespace Game.Audio.Environment
                 }
             }
         }
-
 
 
         // // Calculates starting position, next position to move and plays wind sound
