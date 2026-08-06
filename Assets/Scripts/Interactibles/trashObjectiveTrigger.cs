@@ -50,8 +50,7 @@ namespace Game.Objective
 
                 if (collectionManager.IsCollectionComplete)
                 {
-                    testTerrainObj?.CompleteObjective();
-                    testTerrainTrees?.CompleteObjective();
+
                 }
 
                 Destroy(gameObject);

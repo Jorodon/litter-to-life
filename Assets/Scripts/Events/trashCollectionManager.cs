@@ -24,6 +24,7 @@ namespace Game.Objective
         private HashSet<trashObjectiveTrigger> collectedTrash =
             new HashSet<trashObjectiveTrigger>();
 
+        public static event Action<string> OnObjectiveCompleted;
         private Dictionary<trashScriptableObject, ObjectiveProgress> objectiveProgress =
             new Dictionary<trashScriptableObject, ObjectiveProgress>();
 
@@ -55,7 +56,7 @@ namespace Game.Objective
                 trashScriptableObject objective = objectiveEntry.Key;
                 ObjectiveProgress progress = objectiveEntry.Value;
                 string milestones = string.Join(", ", objective.MilestonePercentages);
-                Log(
+                Debug.Log(
                     $"Objective '{objective.objectiveID}' milestones: [{milestones}] "
                         + $"total tracked: {progress.TrackedCount}"
                 );
@@ -109,7 +110,7 @@ namespace Game.Objective
                 return false;
             }
 
-            Log(
+            Debug.Log(
                 $"Collected trash='{trash.name}' into trashCan='{trashCanCollider.name}'. "
                     + $"Progress: {CollectedTrashCount} / {TotalTrashCount} ({CollectionPercentage:F2}%)"
             );
@@ -128,7 +129,7 @@ namespace Game.Objective
 
             if (IsCollectionComplete)
             {
-                Log("All trash collected across all objectives.");
+                Debug.Log("All trash collected across all objectives.");
                 OnAllObjectivesCompleted?.Invoke();
             }
 
@@ -159,7 +160,7 @@ namespace Game.Objective
 
                 string nextMilestone = i + 1 < milestones.Count ? $"{milestones[i + 1]}%" : "none";
 
-                Log(
+                Debug.Log(
                     $"Objective '{objective.objectiveID}' reached "
                         + $"{milestone}% milestone ({progress.CollectedCount}/{progress.TrackedCount}). "
                         + $"Current: {percent:F2}%, next milestone: {nextMilestone}"
