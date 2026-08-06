@@ -4,11 +4,8 @@ using UnityEngine;
 
 namespace Game.Objective
 {
-    public class trashCollectionManager : MonoBehaviour
+    public class trashCollectionManager : objectiveManagerBase<trashCollectionManager>
     {
-        // Sets up global instance for progression manager
-        public static trashCollectionManager Instance { get; private set; }
-
         private class ObjectiveProgress
         {
             public int TrackedCount;
@@ -19,7 +16,6 @@ namespace Game.Objective
                 TrackedCount == 0 ? 0f : (float)CollectedCount / TrackedCount * 100f;
         }
 
-        private HashSet<string> completedObjectives = new HashSet<string>();
         private HashSet<trashObjectiveTrigger> trackedTrash = new HashSet<trashObjectiveTrigger>();
         private HashSet<trashObjectiveTrigger> collectedTrash =
             new HashSet<trashObjectiveTrigger>();
@@ -27,7 +23,6 @@ namespace Game.Objective
         private Dictionary<trashScriptableObject, ObjectiveProgress> objectiveProgress =
             new Dictionary<trashScriptableObject, ObjectiveProgress>();
 
-        public static event Action<string> OnObjectiveCompleted;
         public static event Action<string, float> OnObjectiveMilestoneReached;
         public static event Action OnAllObjectivesCompleted;
 
@@ -38,25 +33,6 @@ namespace Game.Objective
         public bool IsCollectionComplete =>
             TotalTrashCount > 0 && CollectedTrashCount >= TotalTrashCount;
 
-        private void Awake()
-        {
-            if (Instance != null && Instance != this)
-            {
-                Destroy(gameObject);
-                return;
-            }
-
-            Instance = this;
-        }
-
-        private void OnDestroy()
-        {
-            if (Instance == this)
-            {
-                Instance = null;
-            }
-        }
-
         private void Start()
         {
             foreach (var objectiveEntry in objectiveProgress)
@@ -64,14 +40,14 @@ namespace Game.Objective
                 trashScriptableObject objective = objectiveEntry.Key;
                 ObjectiveProgress progress = objectiveEntry.Value;
                 string milestones = string.Join(", ", objective.MilestonePercentages);
-                Debug.Log(
-                    $"[TrashCollection] Objective '{objective.objectiveID}' milestones: [{milestones}] "
+                Log(
+                    $"Objective '{objective.objectiveID}' milestones: [{milestones}] "
                         + $"total tracked: {progress.TrackedCount}"
                 );
             }
         }
 
-        public void RegisterTrash(trashObjectiveTrigger trash, trashScriptableObject objective)
+        public void RegisterTrash(trashObjectiveTrigger trash, trashScriptableObject[] objectives)
         {
             if (trash == null)
             {
@@ -80,8 +56,18 @@ namespace Game.Objective
 
             trackedTrash.Add(trash);
 
-            if (objective != null)
+            if (objectives == null)
             {
+                return;
+            }
+
+            foreach (trashScriptableObject objective in objectives)
+            {
+                if (objective == null)
+                {
+                    continue;
+                }
+
                 if (!objectiveProgress.TryGetValue(objective, out var progress))
                 {
                     progress = new ObjectiveProgress();
@@ -95,7 +81,7 @@ namespace Game.Objective
         public bool TryCollectTrash(
             trashObjectiveTrigger trash,
             Collider trashCanCollider,
-            trashScriptableObject objective
+            trashScriptableObject[] objectives
         )
         {
             if (trash == null || trashCanCollider == null)
@@ -108,20 +94,26 @@ namespace Game.Objective
                 return false;
             }
 
-            Debug.Log(
-                $"[TrashCollection] Collected trash='{trash.name}' into trashCan='{trashCanCollider.name}'. "
+            Log(
+                $"Collected trash='{trash.name}' into trashCan='{trashCanCollider.name}'. "
                     + $"Progress: {CollectedTrashCount} / {TotalTrashCount} ({CollectionPercentage:F2}%)"
             );
 
-            if (objective != null && objectiveProgress.TryGetValue(objective, out var progress))
+            if (objectives != null)
             {
-                progress.CollectedCount++;
-                CheckObjectiveMilestones(objective, progress);
+                foreach (trashScriptableObject objective in objectives)
+                {
+                    if (objective != null && objectiveProgress.TryGetValue(objective, out var progress))
+                    {
+                        progress.CollectedCount++;
+                        CheckObjectiveMilestones(objective, progress);
+                    }
+                }
             }
 
             if (IsCollectionComplete)
             {
-                Debug.Log("[TrashCollection] All trash collected across all objectives.");
+                Log("All trash collected across all objectives.");
                 OnAllObjectivesCompleted?.Invoke();
             }
 
@@ -152,8 +144,8 @@ namespace Game.Objective
 
                 string nextMilestone = i + 1 < milestones.Count ? $"{milestones[i + 1]}%" : "none";
 
-                Debug.Log(
-                    $"[TrashCollection] Objective '{objective.objectiveID}' reached "
+                Log(
+                    $"Objective '{objective.objectiveID}' reached "
                         + $"{milestone}% milestone ({progress.CollectedCount}/{progress.TrackedCount}). "
                         + $"Current: {percent:F2}%, next milestone: {nextMilestone}"
                 );
@@ -165,29 +157,6 @@ namespace Game.Objective
                     CompleteObjective(objective.objectiveID);
                 }
             }
-        }
-
-        public bool CompleteObjective(string objectiveID)
-        {
-            if (string.IsNullOrWhiteSpace(objectiveID))
-            {
-                return false;
-            }
-
-            if (!completedObjectives.Add(objectiveID))
-            {
-                return false;
-            }
-
-            Debug.Log($"[TrashCollection] Objective completed: '{objectiveID}'");
-
-            OnObjectiveCompleted?.Invoke(objectiveID);
-            return true;
-        }
-
-        public bool IsObjectiveCompleted(string objectiveID)
-        {
-            return completedObjectives.Contains(objectiveID);
         }
 
         public float GetObjectiveProgress(trashScriptableObject objective)
