@@ -19,7 +19,7 @@ namespace Game.Objective
                 TrackedCount == 0 ? 0f : (float)CollectedCount / TrackedCount * 100f;
         }
 
-        private HashSet<string> completedObjectives = new HashSet<string>();
+        private static HashSet<string> completedObjectives = new HashSet<string>();
         private HashSet<trashObjectiveTrigger> trackedTrash = new HashSet<trashObjectiveTrigger>();
         private HashSet<trashObjectiveTrigger> collectedTrash =
             new HashSet<trashObjectiveTrigger>();
@@ -185,7 +185,7 @@ namespace Game.Objective
             return true;
         }
 
-        public bool IsObjectiveCompleted(string objectiveID)
+        public static bool IsObjectiveCompleted(string objectiveID)
         {
             return completedObjectives.Contains(objectiveID);
         }

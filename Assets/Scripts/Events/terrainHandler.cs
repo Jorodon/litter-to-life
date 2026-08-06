@@ -307,6 +307,13 @@ namespace Game.Environment
         public Vector3 GetSingleRandomTreeLocation(int excludedLayerIndex, float exclusionThreshold)
         {
 
+            // Pull tree instances from terrain
+            List<TreeInstance> currentInstances = new List<TreeInstance>(terrainData.treeInstances);
+            if (currentInstances.Count == 0)
+            {
+                return Vector3.zero;
+            }
+
             // Store alphamap dimensions
             int mapWidth = terrainData.alphamapWidth;
             int mapHeight = terrainData.alphamapHeight;
@@ -314,9 +321,6 @@ namespace Game.Environment
             // Store alphamap for terrain
             float[,,] alphamapData = terrainData.GetAlphamaps(0, 0, mapWidth, mapHeight);
             
-            // Pull tree instances from terrain
-            List<TreeInstance> currentInstances = new List<TreeInstance>(terrainData.treeInstances);
-
             TreeInstance birdTree = currentInstances[Random.Range(0, currentInstances.Count)];
 
             // Get prefab from tree instance and find height using renderer component bounds on first LOD
