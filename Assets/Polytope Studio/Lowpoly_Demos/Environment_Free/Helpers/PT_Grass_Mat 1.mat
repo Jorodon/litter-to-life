@@ -10,7 +10,7 @@ Material:
   m_Name: PT_Grass_Mat 1
   m_Shader: {fileID: 4800000, guid: 233be0623027421449b81f7423abaf79, type: 3}
   m_Parent: {fileID: 2100000, guid: 33e92b212d568b844ae30511d6c23987, type: 2}
-  m_ModifiedSerializedProperties: 0
+  m_ModifiedSerializedProperties: 16
   m_ValidKeywords:
   - _CUSTOMWIND_ON
   - _TRANSLUCENCYONOFF_ON
@@ -20,7 +20,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 1500
   stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
@@ -40,3 +40,4 @@ Material:
     - _GroundColor: {r: 0.028686337, g: 0.19245279, b: 0.059879947, a: 0.2509804}
     - _TopColor: {r: 0, g: 0.34901962, b: 0.0017377321, a: 1}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1

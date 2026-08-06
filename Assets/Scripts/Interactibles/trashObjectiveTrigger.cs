@@ -11,11 +11,11 @@ namespace Game.Objective
         [SerializeField]
         private trashScriptableObject[] objectives;
 
-        [SerializeField]
-        private terrainDetailSO testTerrainObj;
+        // [SerializeField]
+        // private terrainDetailSO testTerrainObj;
 
-        [SerializeField]
-        private terrainDetailSO testTerrainTrees;
+        // [SerializeField]
+        // private terrainDetailSO testTerrainTrees;
 
         [SerializeField]
         private trashCollectionManager collectionManager;
@@ -50,8 +50,7 @@ namespace Game.Objective
 
                 if (collectionManager.IsCollectionComplete)
                 {
-                    testTerrainObj?.CompleteObjective();
-                    testTerrainTrees?.CompleteObjective();
+
                 }
 
                 Destroy(gameObject);

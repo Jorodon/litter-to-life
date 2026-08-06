@@ -22,6 +22,9 @@ namespace Game.Environment
         [SerializeField]
         public trashScriptableObject trashSO;
 
+        [SerializeField]
+        private List<trashScriptableObject> mainObjectives;
+
         public Collider colliderTest;
 
         private List<terrainHandler> terrainList = new List<terrainHandler>();
@@ -81,33 +84,13 @@ namespace Game.Environment
                 SelectivelyRestoreAllCacheInArea(colliderTest, detailSOList[1].relaventObjects);
             }
 
-            // for (int i = 0; i < detailSOList.Count; i++)
-            // {
-            //     if (objectiveID == detailSOList[i].objectiveID)
-            //     {
-            //         switch (detailSOList[i].objectName)
-            //         {
-            //             case "flowers":
-            //                 SelectivelyRestoreAllCache(detailSOList[i].relaventObjects);
-            //                 break;
-            //             case "trees":
-            //                 //GenerateAllTrees();
-            //                 RestoreAllTrees();
-            //                 break;
-            //             case "mushrooms":
-            //                 //TO-DO : Generate mushrooms
-            //                 break;
-            //             case "grass":
-            //                 //TO-DO : Generate low grass
-            //                 break;
-            //         }
-            //     }
-            // }
+            int index = mainObjectives.FindIndex(i => i.objectiveID == objectiveID);
 
-            // if (objectiveID == treeSOList[0].objectiveID)
-            // {
-            //     RestoreAllTrees();
-            // }
+            if (mainObjectives != null && index != -1)
+            {
+                // Add list of mesh collider objects corresponding to zones here.
+                SelectivelyRestoreAllCacheInArea(colliderTest, detailSOList[1].relaventObjects);
+            }
         }
 
         private void HandleAllObjectiveCompletion()
@@ -160,7 +143,12 @@ namespace Game.Environment
             for (int i = 0; i < numberOfBirds; i++)
             {
                 terrainHandler instance = terrainList[Random.Range(0, 9)];
-                birdSpawns.Add(instance.GetSingleRandomTreeLocation(excludedLayerIndex, exclusionThreshold));
+
+                Vector3 birdSpawn = instance.GetSingleRandomTreeLocation(excludedLayerIndex, exclusionThreshold);
+                if (birdSpawn != Vector3.zero)
+                {
+                    birdSpawns.Add(birdSpawn);
+                }
             }
             return birdSpawns;
         }

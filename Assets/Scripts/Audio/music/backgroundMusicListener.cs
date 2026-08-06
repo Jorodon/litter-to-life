@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Security.Cryptography;
 using FMODUnity;
 using Game.Objective;
@@ -16,12 +17,17 @@ namespace Game.Audio.Music
         private EventReference musicEventReference;
 
         [SerializeField]
-        private trashScriptableObject mainObjective;
+        private trashScriptableObject testObjective;
+
+        [SerializeField]
+        private List<trashScriptableObject> mainObjectives;
 
         [SerializeField]
         private GameObject canvas;
 
         private backgroundMusicManager backgroundMusicWrapper;
+
+        private int musicState = 1;
 
         // Runs before Start() to prevent duplicates, set a single Instance, and ensure it survives across scenes
         private void Awake()
@@ -63,17 +69,24 @@ namespace Game.Audio.Music
         // Checks that applicable objective was completed, then increases music state
         private void HandleObjectiveCompletion(string objectiveID)
         {
-            if (mainObjective != null && objectiveID == mainObjective.objectiveID)
+            if (testObjective != null && objectiveID == testObjective.objectiveID)
             {
                 IncreaseMusicState();
                 Instantiate(canvas);
+            }
+            int index = mainObjectives.FindIndex(i => i.objectiveID == objectiveID && musicState < 4);
+
+            if (mainObjectives != null && index != -1)
+            {
+                IncreaseMusicState();
+                musicState++;
             }
         }
 
          // Checks that applicable objective was completed, then increases music state
         private void HandleMilestoneCompletion(string objectiveID, float milestone)
         {
-            if (mainObjective != null && objectiveID == mainObjective.objectiveID)
+            if (testObjective != null && objectiveID == testObjective.objectiveID)
             {
                 IncreaseMusicState();
             }
@@ -83,6 +96,8 @@ namespace Game.Audio.Music
         private void HandleAllCompleted()
         {
             Debug.Log("All objectives completed.");
+            IncreaseMusicState();
+            Instantiate(canvas);
         }
 
 

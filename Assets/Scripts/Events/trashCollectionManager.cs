@@ -4,8 +4,11 @@ using UnityEngine;
 
 namespace Game.Objective
 {
-    public class trashCollectionManager : objectiveManagerBase<trashCollectionManager>
+    public class trashCollectionManager : MonoBehaviour
     {
+        // Sets up global instance for progression manager
+        public static trashCollectionManager Instance { get; private set; }
+        
         private class ObjectiveProgress
         {
             public int TrackedCount;
@@ -16,10 +19,12 @@ namespace Game.Objective
                 TrackedCount == 0 ? 0f : (float)CollectedCount / TrackedCount * 100f;
         }
 
+        private static HashSet<string> completedObjectives = new HashSet<string>();
         private HashSet<trashObjectiveTrigger> trackedTrash = new HashSet<trashObjectiveTrigger>();
         private HashSet<trashObjectiveTrigger> collectedTrash =
             new HashSet<trashObjectiveTrigger>();
 
+        public static event Action<string> OnObjectiveCompleted;
         private Dictionary<trashScriptableObject, ObjectiveProgress> objectiveProgress =
             new Dictionary<trashScriptableObject, ObjectiveProgress>();
 
@@ -33,6 +38,17 @@ namespace Game.Objective
         public bool IsCollectionComplete =>
             TotalTrashCount > 0 && CollectedTrashCount >= TotalTrashCount;
 
+        private void Awake()
+        {
+            if (Instance != null && Instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
+            Instance = this;
+        }
+        
         private void Start()
         {
             foreach (var objectiveEntry in objectiveProgress)
@@ -40,7 +56,7 @@ namespace Game.Objective
                 trashScriptableObject objective = objectiveEntry.Key;
                 ObjectiveProgress progress = objectiveEntry.Value;
                 string milestones = string.Join(", ", objective.MilestonePercentages);
-                Log(
+                Debug.Log(
                     $"Objective '{objective.objectiveID}' milestones: [{milestones}] "
                         + $"total tracked: {progress.TrackedCount}"
                 );
@@ -94,7 +110,7 @@ namespace Game.Objective
                 return false;
             }
 
-            Log(
+            Debug.Log(
                 $"Collected trash='{trash.name}' into trashCan='{trashCanCollider.name}'. "
                     + $"Progress: {CollectedTrashCount} / {TotalTrashCount} ({CollectionPercentage:F2}%)"
             );
@@ -113,7 +129,7 @@ namespace Game.Objective
 
             if (IsCollectionComplete)
             {
-                Log("All trash collected across all objectives.");
+                Debug.Log("All trash collected across all objectives.");
                 OnAllObjectivesCompleted?.Invoke();
             }
 
@@ -144,7 +160,7 @@ namespace Game.Objective
 
                 string nextMilestone = i + 1 < milestones.Count ? $"{milestones[i + 1]}%" : "none";
 
-                Log(
+                Debug.Log(
                     $"Objective '{objective.objectiveID}' reached "
                         + $"{milestone}% milestone ({progress.CollectedCount}/{progress.TrackedCount}). "
                         + $"Current: {percent:F2}%, next milestone: {nextMilestone}"
@@ -157,6 +173,29 @@ namespace Game.Objective
                     CompleteObjective(objective.objectiveID);
                 }
             }
+        }
+
+        public bool CompleteObjective(string objectiveID)
+        {
+            if (string.IsNullOrWhiteSpace(objectiveID))
+            {
+                return false;
+            }
+
+            if (!completedObjectives.Add(objectiveID))
+            {
+                return false;
+            }
+
+            Debug.Log($"[TrashCollection] Objective completed: '{objectiveID}'");
+
+            OnObjectiveCompleted?.Invoke(objectiveID);
+            return true;
+        }
+
+        public static bool IsObjectiveCompleted(string objectiveID)
+        {
+            return completedObjectives.Contains(objectiveID);
         }
 
         public float GetObjectiveProgress(trashScriptableObject objective)

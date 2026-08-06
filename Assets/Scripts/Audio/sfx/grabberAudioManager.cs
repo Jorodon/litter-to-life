@@ -23,5 +23,15 @@ public class grabberAudioManager : MonoBehaviour
         RuntimeManager.PlayOneShot(releaseSound, transform.position);
     }
 
+    public void GrabObjectSFX(SelectEnterEventArgs args)
+    {
+        RuntimeManager.PlayOneShot(grabSound, transform.position);
+    }
+
+    public void ReleaseObjectSFX(SelectExitEventArgs args)
+    {
+        RuntimeManager.PlayOneShot(releaseSound, transform.position);
+    }
+
 }
 
