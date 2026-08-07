@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Security.Cryptography;
 using FMODUnity;
 using Game.Objective;
@@ -19,17 +18,13 @@ namespace Game.Audio.Music
         private EventReference trackTwoReference;
 
         [SerializeField]
-        private trashScriptableObject testObjective;
-
-        [SerializeField]
-        private List<trashScriptableObject> mainObjectives;
+        private trashScriptableObject mainObjective;
 
         [SerializeField]
         private GameObject canvas;
 
         private backgroundMusicManager backgroundMusicWrapper;
 
-        private int musicState = 1;
 
         private int musicTrack = 1;
 
@@ -73,24 +68,15 @@ namespace Game.Audio.Music
         // Checks that applicable objective was completed, then increases music state
         private void HandleObjectiveCompletion(string objectiveID)
         {
-            if (testObjective != null && objectiveID == testObjective.objectiveID)
             {
                 IncreaseMusicState();
                 Instantiate(canvas);
-            }
-            int index = mainObjectives.FindIndex(i => i.objectiveID == objectiveID && musicState < 4);
-
-            if (mainObjectives != null && index != -1)
-            {
-                IncreaseMusicState();
-                musicState++;
             }
         }
 
          // Checks that applicable objective was completed, then increases music state
         private void HandleMilestoneCompletion(string objectiveID, float milestone)
         {
-            if (testObjective != null && objectiveID == testObjective.objectiveID)
             {
                 IncreaseMusicState();
             }
@@ -100,8 +86,6 @@ namespace Game.Audio.Music
         private void HandleAllCompleted()
         {
             Debug.Log("All objectives completed.");
-            IncreaseMusicState();
-            Instantiate(canvas);
         }
 
 
