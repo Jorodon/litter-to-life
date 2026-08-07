@@ -21,6 +21,8 @@ TagManager:
   - DrawingCanvas
   - Grabber
   - TrashBag
+  - Barrier
+  - Trash
   - 
   - 
   - 

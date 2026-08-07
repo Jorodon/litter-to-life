@@ -5,7 +5,7 @@
 			<value>Fog Clear</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<relationship name="folder">
 			<destination>{9944103c-d541-4cd0-abf0-52225a6a16a5}</destination>
@@ -96,6 +96,7 @@
 	<object class="MixerBusEffectChain" id="{63dda5ec-b8ca-46dc-84bc-231d4b09c64b}">
 		<relationship name="effects">
 			<destination>{e6ee42fb-6698-4fef-996d-28adb1af45ca}</destination>
+			<destination>{1c8666f7-a25f-4654-9b61-1314dc3580fd}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{bac936b7-8b89-411c-b591-7f1289b850c1}" />
@@ -106,4 +107,15 @@
 	</object>
 	<object class="MixerBusFader" id="{21a7138d-b00d-42a7-ab3d-a80573ce66ea}" />
 	<object class="MixerBusFader" id="{e6ee42fb-6698-4fef-996d-28adb1af45ca}" />
+	<object class="SpatialiserEffect" id="{1c8666f7-a25f-4654-9b61-1314dc3580fd}">
+		<property name="minimumDistance">
+			<value>25</value>
+		</property>
+		<property name="maximumDistance">
+			<value>400</value>
+		</property>
+		<property name="overrideRange">
+			<value>true</value>
+		</property>
+	</object>
 </objects>
