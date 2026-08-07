@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Security.Cryptography;
 using FMODUnity;
 using Game.Objective;
@@ -11,21 +12,21 @@ namespace Game.Audio.Music
         public static backgroundMusicListener Instance { get; private set; }
 
         // Serialized field to get initial music event
-        [Header("Background Music Events")]
+        [Header("Background Music Event")]
         [SerializeField]
         private EventReference trackOneReference;
         [SerializeField]
         private EventReference trackTwoReference;
 
         [SerializeField]
-        private trashScriptableObject mainObjective;
+        private List<trashScriptableObject> mainObjectives;
 
         [SerializeField]
         private GameObject canvas;
 
         private backgroundMusicManager backgroundMusicWrapper;
 
-
+        private int musicState = 0;
         private int musicTrack = 1;
 
         // Runs before Start() to prevent duplicates, set a single Instance, and ensure it survives across scenes
@@ -68,24 +69,30 @@ namespace Game.Audio.Music
         // Checks that applicable objective was completed, then increases music state
         private void HandleObjectiveCompletion(string objectiveID)
         {
+            int index = mainObjectives.FindIndex(i => i.objectiveID == objectiveID && musicState < 4);
+
+            if (mainObjectives != null && index != -1)
             {
                 IncreaseMusicState();
-                Instantiate(canvas);
+                musicState++;
             }
         }
 
          // Checks that applicable objective was completed, then increases music state
         private void HandleMilestoneCompletion(string objectiveID, float milestone)
         {
-            {
-                IncreaseMusicState();
-            }
+            // if (testObjective != null && objectiveID == testObjective.objectiveID)
+            // {
+            //     IncreaseMusicState();
+            // }
         }
 
          // Checks that applicable objective was completed, then increases music state
         private void HandleAllCompleted()
         {
             Debug.Log("All objectives completed.");
+            IncreaseMusicState();
+            Instantiate(canvas);
         }
 
 
@@ -135,6 +142,7 @@ namespace Game.Audio.Music
             if (musicTrack == 1)
             {
                 backgroundMusicWrapper.SwitchMusicTrack(trackTwoReference);
+                musicTrack = 2;
             }
         }
 
