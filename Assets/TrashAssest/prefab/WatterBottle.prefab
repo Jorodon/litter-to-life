@@ -68,6 +68,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WatterBottle
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 99f2df16a704afb45b42546427f17dc1, type: 3}
+      propertyPath: m_TagString
+      value: Trash
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
