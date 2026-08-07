@@ -12,9 +12,11 @@ namespace Game.Audio.Music
         public static backgroundMusicListener Instance { get; private set; }
 
         // Serialized field to get initial music event
-        [Header("Background Music Event")]
+        [Header("Background Music Events")]
         [SerializeField]
-        private EventReference musicEventReference;
+        private EventReference trackOneReference;
+        [SerializeField]
+        private EventReference trackTwoReference;
 
         [SerializeField]
         private trashScriptableObject testObjective;
@@ -29,6 +31,8 @@ namespace Game.Audio.Music
 
         private int musicState = 1;
 
+        private int musicTrack = 1;
+
         // Runs before Start() to prevent duplicates, set a single Instance, and ensure it survives across scenes
         private void Awake()
         {
@@ -41,7 +45,7 @@ namespace Game.Audio.Music
             Instance = this;
             DontDestroyOnLoad(gameObject);
 
-            backgroundMusicWrapper = new backgroundMusicManager(musicEventReference, transform);
+            backgroundMusicWrapper = new backgroundMusicManager(trackOneReference, transform);
         }
 
         // Starts the selected music event
@@ -139,6 +143,15 @@ namespace Game.Audio.Music
         public void ChangeTrack(EventReference newEventReference)
         {
             backgroundMusicWrapper.SwitchMusicTrack(newEventReference);
+        }
+
+        // Stops playback of current music event and changes to a different music event
+        public void ChangeTrack()
+        {
+            if (musicTrack == 1)
+            {
+                backgroundMusicWrapper.SwitchMusicTrack(trackTwoReference);
+            }
         }
 
         // Stops playback of music event when object is destroyed

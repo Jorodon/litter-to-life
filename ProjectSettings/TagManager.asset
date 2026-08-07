@@ -19,6 +19,8 @@ TagManager:
   - Ground
   - BrushHandle
   - DrawingCanvas
+  - Grabber
+  - TrashBag
   - Barrier
   - Trash
   - 
