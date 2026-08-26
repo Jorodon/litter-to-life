@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 555702386011898357}
   - component: {fileID: 5639062767017248417}
   - component: {fileID: 1418958544434495725}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -150,6 +150,37 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &5038999326256005912
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 438267797418244115}
+  m_Layer: 13
+  m_Name: Attach
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &438267797418244115
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5038999326256005912}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.00028, y: -0.0004, z: 0.00186}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3621479124383445207}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &3875538171553077052
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -228,6 +259,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 99f2df16a704afb45b42546427f17dc1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8845190026316689122}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 99f2df16a704afb45b42546427f17dc1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 438267797418244115}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 99f2df16a704afb45b42546427f17dc1, type: 3}
       insertIndex: -1
@@ -271,7 +305,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Objective.trashObjectiveTrigger
   trashCanTag: TrashCan
-  objective: {fileID: 11400000, guid: 722b27d80ff9b004fae5cac32d4daf9b, type: 2}
+  objectives: []
   collectionManager: {fileID: 0}
 --- !u!54 &-8807538153691552935
 Rigidbody:
@@ -357,9 +391,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.XR.Interaction.Toolkit::UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable
   m_InteractionManager: {fileID: 0}
-  m_Colliders: []
+  m_Colliders:
+  - {fileID: 7201995809075064762}
   m_InteractionLayers:
-    m_Bits: 1
+    m_Bits: 4
   m_DistanceCalculationMode: 1
   m_SelectMode: 0
   m_FocusMode: 1
