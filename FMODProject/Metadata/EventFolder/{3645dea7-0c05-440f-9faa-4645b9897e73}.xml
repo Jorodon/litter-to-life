@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="EventFolder" id="{3645dea7-0c05-440f-9faa-4645b9897e73}">
+		<property name="name">
+			<value>Trash Bag</value>
+		</property>
+		<relationship name="folder">
+			<destination>{198dbf9f-d0b3-4d80-a544-c3d1e8a25ebd}</destination>
+		</relationship>
+	</object>
+</objects>

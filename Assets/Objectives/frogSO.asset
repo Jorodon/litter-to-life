@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d910d1c803aaceb418c02e2f8cd5cab7, type: 3}
+  m_Name: frogSO
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Objective.terrainDetailSO
+  objectiveID: OBJ_SPAWN_FROGS
+  objectName: frogs
+  relaventObjects:
+  - {fileID: 7954856951575608776, guid: 6229701ce8e0a184ba6d632fe573d1c2, type: 3}

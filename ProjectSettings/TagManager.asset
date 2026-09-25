@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - Anchor
+  - RegionManager
+  - Trash
+  - TrashCan
   layers:
   - Default
   - TransparentFX
@@ -12,15 +15,15 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Skybox
+  - Ground
+  - BrushHandle
+  - DrawingCanvas
+  - Grabber
+  - TrashBag
+  - Barrier
+  - Trash
+  - Player
   - 
   - 
   - 

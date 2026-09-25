@@ -1,0 +1,134 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6832091602214360382
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Editor::UnityEditor.Rendering.Universal.AssetVersion
+  version: 10
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Volume Fog procedural Zone 2
+  m_Shader: {fileID: -6465566751694194690, guid: 8f95a244975dcd54087ef12ab5cafe65, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses:
+  - MOTIONVECTORS
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Texture2D_247129A1:
+        m_Texture: {fileID: 2800000, guid: f8f6893015d273b4aa85dc59c794f5b2, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _3D_Noise:
+        m_Texture: {fileID: 11700000, guid: f1b46a56d0c951b468f379dfc5547eec, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Mask_3D_Texture:
+        m_Texture: {fileID: 11700000, guid: f1b46a56d0c951b468f379dfc5547eec, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Noise2D:
+        m_Texture: {fileID: 2800000, guid: 05bc2e751e5085f46a2acb30bd8ef4da, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Noise3D:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - Vector1_4EEA1A9E: 0.4
+    - Vector1_522DD793: 4
+    - Vector1_5E73A52C: 6
+    - Vector1_6098A7A7: 10.16
+    - Vector1_6DD21BAC: 174.6
+    - Vector1_6F1EA0F8: 33
+    - Vector1_705D9E76: 160
+    - Vector1_82DE1604: 0.78
+    - Vector1_A8E3BAE4: 1.23
+    - Vector1_AF6ECEBD: -0.6
+    - Vector1_B0641435: 286.5
+    - _AlphaClip: 1
+    - _AlphaToMask: 0
+    - _BUILTIN_QueueControl: -1
+    - _BUILTIN_QueueOffset: 0
+    - _Blend: 0
+    - _BoundsFade: -328.51
+    - _BoundsFadeRange: 225.2
+    - _CastShadows: 1
+    - _Cull: 1
+    - _Distance_Multiplier: 0
+    - _DstBlend: 10
+    - _DstBlendAlpha: 10
+    - _LoopStop: 3.5
+    - _Multiplier: 0.2
+    - _Noise2DPower: 10
+    - _Noise2DScale: 0.531
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _Randomness: 0.2
+    - _Samples: 60
+    - _ShadowAdd: -0.34
+    - _ShadowMulti: 1
+    - _Size: 22
+    - _SrcBlend: 5
+    - _SrcBlendAlpha: 1
+    - _Surface: 1
+    - _Threshold: -0.47
+    - _YtoSizeRation: 2
+    - _ZTest: 8
+    - _ZWrite: 0
+    - _ZWriteControl: 0
+    m_Colors:
+    - Color_69AD1AD: {r: 0.6037736, g: 0.6037736, b: 0.6037736, a: 0}
+    - _Offset: {r: 0, g: 0, b: 0, a: 0}
+    - _Shadow_Tint: {r: 0.254717, g: 0.254717, b: 0.254717, a: 0}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
+--- !u!114 &7361781099754854352
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 639247ca83abc874e893eb93af2b5e44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.ShaderGraph.Editor::UnityEditor.Rendering.BuiltIn.AssetVersion
+  version: 0
